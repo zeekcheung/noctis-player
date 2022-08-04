@@ -23,6 +23,7 @@ jobs:
       - name: ssh docker login
         uses: appleboy/ssh-action@master
         with:
-          username: ${{ secrets.SSH_USERNAME }}
-          password: ${{ secrets.SSH_PASSWORD }}
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
           script: cd ~ && sh noctis-player-deploy.sh ${{ secrets.DOCKER_USERNAME }} ${{ secrets.DOCKER_PASSWORD }}
