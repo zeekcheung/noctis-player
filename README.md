@@ -1,46 +1,85 @@
-# Getting Started with Create React App
+<div align="center">
+  <a href="#">
+    <img src="./public/logo.png" alt="Logo" width="120">
+  </a>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+  <p align="center">
+    <a href="https://github.com/othneildrew/Best-README-Template">演示✨</a>
+    |
+    <a href="https://github.com/othneildrew/Best-README-Template">文档📦</a>
+  </p>
+</div>
 
-## Available Scripts
+## 简介
 
-In the project directory, you can run:
+Noctis Player 是一个基于 React、TypeScript 的音乐播放器。
 
-### `npm start`
+![项目首页截图](https://)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### 技术栈
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- [React](https://github.com/facebook/react/)
+- [React Router][react router]
+- [React Query][react query]]
+- [TypeScript][typescript]
+- [Material UI][material ui]
+- [Emotion][emotion]
+- [Axios](https://axios-http.com/docs/intro)
 
-### `npm test`
+## 演示截图
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+截图
 
-### `npm run build`
+## 功能列表
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- [ ] 登录/登出（目前仅支持手机密码登录）
+- [ ] 主页
+  - [ ] 热门推荐歌单
+  - [ ] 推荐华语音乐
+  - [ ] 推荐流行音乐
+- [ ] 搜索页
+  - [ ] 歌单分类
+  - [ ] 精品歌单
+  - [ ] 搜索建议
+  - [ ] 搜索关键词（音乐、歌手...）
+- [ ] 歌单详情页
+  - [ ] 收藏/取消收藏歌单
+  - [ ] 播放歌单
+- [ ] 音乐播放功能
+  - [ ] 播放列表
+  - [ ] 单曲循环/随机播放
+  - [ ] 切换歌曲
+  - [ ] 拖拽进度条和音量条
+  - [ ] 歌词滚动/点击歌词跳转
+  - [ ] MV 页面(无 MV 播放栏不显示图标) 点击自动暂停音乐自动切换其他 MV
+- [ ] 音乐库（需要登录）
+  - [ ] 创建的歌单列表
+  - [ ] 收藏的歌单列表
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 开始使用
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```powershell
+npm install
 
-### `npm run eject`
+npm run start
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## 贡献和支持 🤝
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+欢迎提供问题和功能需求, 如果大家有好的点子和优化建议, 也欢迎提 pr 参与我们的共建.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+如果觉得项目还不错, 就点个 star 吧~
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## 联系方式
 
-## Learn More
+Your Name
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- [@your_twitter](https://twitter.com/your_username)
+- email@example.com
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 参考 🖇️
+
+项目灵感来自于以下项目
+
+- [react-netease-music](https://github.com/uniquemo/react-netease-music)
+- [NeteaseCloudMusicApi](https://binaryify.github.io/NeteaseCloudMusicApi)
