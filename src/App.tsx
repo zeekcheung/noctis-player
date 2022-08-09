@@ -1,11 +1,14 @@
-import './App.css'
-import { Demo } from './components/PlayMusic'
+import { AuthProvider } from './contexts/AuthProvider'
+import { Router } from './routes'
+import { ThemesProvider } from './themes'
 
 function App() {
 	return (
-		<div className="App">
-			<Demo />
-		</div>
+		<ThemesProvider>
+			<AuthProvider>
+				<Router />
+			</AuthProvider>
+		</ThemesProvider>
 	)
 }
 
