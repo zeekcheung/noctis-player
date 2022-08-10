@@ -3,7 +3,6 @@ body,
 #root,
 .App {
 	height: 100vh;
-	font-size: 10px;
 }
 
 * {

@@ -1,26 +1,31 @@
-import { createContext, ReactNode, useContext } from 'react'
+import { createContext, ReactNode, useContext, useState } from 'react'
+import { login as _login, logout as _logout } from '../api/user'
 
-interface User {
-	username: string
+export interface User {
+	id: number
+	vipType: number
+	userName: string
+	nickname: string
+	avatarUrl: string
 }
 
 interface IContext {
 	user: User | null
-	// login: () => Promise<User | null>
-	// logout: () => Promise<void>
+	login: (...props: Parameters<typeof _login>) => Promise<void>
+	logout: () => Promise<void>
 }
 
 export const AuthContext = createContext<IContext | null>(null)
 AuthContext.displayName = 'AuthContext'
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-	// TODO：初始化用户
+	const [user, setUser] = useState<User | null>(null)
+	const login = (...data: Parameters<typeof _login>) =>
+		_login(...data).then(setUser)
+	const logout = () => _logout().then(setUser)
+
 	return (
-		<AuthContext.Provider
-			value={{
-				user: null,
-			}}
-		>
+		<AuthContext.Provider value={{ user, login, logout }}>
 			{children}
 		</AuthContext.Provider>
 	)
@@ -32,4 +37,13 @@ export const useUser = () => {
 		return null
 	}
 	return value.user
+}
+
+export const useAuth = () => {
+	const value = useContext(AuthContext)
+	// 抛出异常可以用于返回值的类型收窄
+	if (!value) {
+		throw new Error('当前组件树匹配不到 AuthProvider')
+	}
+	return { ...value }
 }

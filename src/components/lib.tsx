@@ -1,6 +1,7 @@
-import { Box } from '@mui/material'
+import { Box, CircularProgress, Typography } from '@mui/material'
+import { ReactNode } from 'react'
 
-export const FullPageError = ({ error }: { error: Error }) => {
+export const FullPageMessage = ({ children }: { children: ReactNode }) => {
 	return (
 		<Box
 			sx={{
@@ -9,11 +10,26 @@ export const FullPageError = ({ error }: { error: Error }) => {
 				display: 'flex',
 				justifyContent: 'center',
 				alignItems: 'center',
-				color: 'red',
 				fontSize: '2rem',
 			}}
 		>
-			{error.message}
+			{children}
 		</Box>
+	)
+}
+
+export const FullPageError = ({ error }: { error: Error }) => {
+	return (
+		<FullPageMessage>
+			<Typography sx={{ color: 'red' }}>{error.message}</Typography>
+		</FullPageMessage>
+	)
+}
+
+export const FullPageLoading = () => {
+	return (
+		<FullPageMessage>
+			<CircularProgress />
+		</FullPageMessage>
 	)
 }
