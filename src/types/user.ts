@@ -1,6 +1,6 @@
 export interface User {
-	id: number
-	vipType: number
+	userId: string
+	vipType: string
 	userName: string
 	nickname: string
 	avatarUrl: string

@@ -1,5 +1,5 @@
-import { createContext, useContext, useState } from 'react'
-import { login as _login, logout as _logout } from '../api/user'
+import { createContext, useContext, useEffect, useState } from 'react'
+import { fetchUserInfo, login as _login, logout as _logout } from '../api/user'
 import { ProviderProps } from '../types'
 import { User } from '../types/user'
 
@@ -17,6 +17,13 @@ export const AuthProvider = ({ children }: ProviderProps) => {
 	const login = (...data: Parameters<typeof _login>) =>
 		_login(...data).then(setUser)
 	const logout = () => _logout().then(setUser)
+
+	// TODO：组件挂载时初始化用户状态
+	useEffect(() => {
+		fetchUserInfo()
+			.then(setUser)
+			.catch((err) => console.error(err))
+	}, [])
 
 	return (
 		<AuthContext.Provider value={{ user, login, logout }}>

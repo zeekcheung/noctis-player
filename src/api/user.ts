@@ -1,16 +1,26 @@
 import { User } from '../types/user'
 import { http } from './http'
 
-export const tokenKey = '__token__'
+const storage = window.localStorage
 
-// 设置 token
-export const setToken = (token: string) =>
-	window.localStorage.setItem(tokenKey, token)
+// 在 localStorage 中设置用户信息
+export const setUserInfo = (user: User) => {
+	for (const [key, value] of Object.entries(user)) {
+		storage.setItem(`__${key}__`, value)
+	}
+}
 
-// 清除 token
-export const clearToken = () => window.localStorage.removeItem(tokenKey)
+// 在 localStorage 中清除用户信息
+export const clearUserInfo = () => {
+	storage.clear()
+}
 
-// FIXME: 解决无法登录问题
+// 在 localStorage 中读取用户信息
+export const getUserInfo = (keys: string[]) => {
+	return keys.map((key) => storage.getItem(`__${key}__`) || '')
+}
+
+// 登录
 export const login = (phone: string, password: string): Promise<User> => {
 	return new Promise((resolve, reject) => {
 		http
@@ -18,12 +28,12 @@ export const login = (phone: string, password: string): Promise<User> => {
 				params: { phone, password },
 			})
 			.then((res) => {
-				const { id, userName, vipType } = res.data.account
+				const { userId, userName, vipType } = res.data.account
 				const { nickname, avatarUrl } = res.data.profile
-				const token = res.data.token
+				const user: User = { userId, userName, nickname, vipType, avatarUrl }
 
-				resolve({ id, userName, vipType, nickname, avatarUrl })
-				setToken(token)
+				resolve(user)
+				setUserInfo(user)
 			})
 			.catch((err) => {
 				reject(err.response.data)
@@ -31,13 +41,38 @@ export const login = (phone: string, password: string): Promise<User> => {
 	})
 }
 
+// 登出
 export const logout = (): Promise<null> => {
 	return new Promise((resolve, reject) => {
 		http
 			.get('/logout')
 			.then(() => {
 				resolve(null)
-				clearToken()
+				clearUserInfo()
+			})
+			.catch((err) => {
+				reject(err.response.data)
+			})
+	})
+}
+
+// TODO: 获取用户详情
+export const fetchUserInfo = (): Promise<User | null> => {
+	return new Promise((resolve, reject) => {
+		const [uid] = getUserInfo(['userId'])
+		if (!uid) {
+			resolve(null)
+			return
+		}
+		http
+			.get(`/user/uid=${uid}`)
+			.then((res) => {
+				const { nickname, avatarUrl, vipType, userId } = res.data.profile
+				const userName = ''
+				const user: User = { userId, userName, nickname, vipType, avatarUrl }
+
+				resolve(user)
+				setUserInfo(user)
 			})
 			.catch((err) => {
 				reject(err.response.data)
