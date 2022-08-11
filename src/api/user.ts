@@ -1,7 +1,5 @@
-import axios from 'axios'
 import { User } from '../contexts/AuthProvider'
-
-export const baseURL = process.env.REACT_APP_baseURL
+import { http } from './http'
 
 export const tokenKey = '__token__'
 
@@ -12,10 +10,11 @@ export const setToken = (token: string) =>
 // 清除 token
 export const clearToken = () => window.localStorage.removeItem(tokenKey)
 
+// FIXME: 解决无法登录问题
 export const login = (phone: string, password: string): Promise<User> => {
 	return new Promise((resolve, reject) => {
-		axios
-			.get(`${baseURL}/login/cellphone`, {
+		http
+			.get('/login/cellphone', {
 				params: { phone, password },
 			})
 			.then((res) => {
@@ -34,8 +33,8 @@ export const login = (phone: string, password: string): Promise<User> => {
 
 export const logout = (): Promise<null> => {
 	return new Promise((resolve, reject) => {
-		axios
-			.get(`${baseURL}/logout`)
+		http
+			.get('/logout')
 			.then(() => {
 				resolve(null)
 				clearToken()
