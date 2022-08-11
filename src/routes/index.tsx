@@ -1,6 +1,6 @@
 import { lazy, Suspense } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { FullPageLoading } from '../components/lib'
+import { FullSizeLoading } from '../components/lib'
 
 /* 路由懒加载 */
 const Home = lazy(() => import('../pages/Home'))
@@ -12,7 +12,7 @@ const LibraryTab = lazy(() => import('../pages/Home/Library'))
 export const Router = () => {
 	return (
 		<BrowserRouter>
-			<Suspense fallback={<FullPageLoading />}>
+			<Suspense fallback={<FullSizeLoading />}>
 				<Routes>
 					<Route path="/" element={<Home />}>
 						<Route index element={<HomeTab />} />

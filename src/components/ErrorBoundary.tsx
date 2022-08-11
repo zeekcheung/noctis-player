@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-import { FullPageError } from './lib'
+import { FullSizeError } from './lib'
 
 export default class ErrorBoundary extends React.Component<
 	{ children: ReactNode },
@@ -22,7 +22,7 @@ export default class ErrorBoundary extends React.Component<
 
 	render(): React.ReactNode {
 		return this.state.error ? (
-			<FullPageError error={this.state.error} />
+			<FullSizeError error={this.state.error} />
 		) : (
 			this.props.children
 		)

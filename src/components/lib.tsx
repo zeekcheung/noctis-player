@@ -1,16 +1,17 @@
 import { Box, CircularProgress, Typography } from '@mui/material'
 import { ReactNode } from 'react'
 
-export const FullPageMessage = ({ children }: { children: ReactNode }) => {
+export const FullSizeMessage = ({ children }: { children: ReactNode }) => {
 	return (
 		<Box
 			sx={{
-				width: '100vw',
+				width: '100%',
 				height: '100vh',
 				display: 'flex',
 				justifyContent: 'center',
 				alignItems: 'center',
 				fontSize: '2rem',
+				bgcolor: '#121212',
 			}}
 		>
 			{children}
@@ -18,18 +19,18 @@ export const FullPageMessage = ({ children }: { children: ReactNode }) => {
 	)
 }
 
-export const FullPageError = ({ error }: { error: Error }) => {
+export const FullSizeError = ({ error }: { error: Error }) => {
 	return (
-		<FullPageMessage>
+		<FullSizeMessage>
 			<Typography sx={{ color: 'red' }}>{error.message}</Typography>
-		</FullPageMessage>
+		</FullSizeMessage>
 	)
 }
 
-export const FullPageLoading = () => {
+export const FullSizeLoading = () => {
 	return (
-		<FullPageMessage>
+		<FullSizeMessage>
 			<CircularProgress />
-		</FullPageMessage>
+		</FullSizeMessage>
 	)
 }
