@@ -1,5 +1,6 @@
-import { createContext, ReactNode, useContext, useState } from 'react'
+import { createContext, useContext, useState } from 'react'
 import { login as _login, logout as _logout } from '../api/user'
+import { ProviderProps } from '../types'
 
 export interface User {
 	id: number
@@ -18,7 +19,7 @@ interface IContext {
 export const AuthContext = createContext<IContext | null>(null)
 AuthContext.displayName = 'AuthContext'
 
-export const AuthProvider = ({ children }: { children: ReactNode }) => {
+export const AuthProvider = ({ children }: ProviderProps) => {
 	const [user, setUser] = useState<User | null>(null)
 	const login = (...data: Parameters<typeof _login>) =>
 		_login(...data).then(setUser)

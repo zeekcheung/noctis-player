@@ -5,7 +5,8 @@ import {
 	SnackbarOrigin,
 	SnackbarProps,
 } from '@mui/material'
-import { createContext, Dispatch, ReactNode, useContext, useState } from 'react'
+import { createContext, Dispatch, useContext, useState } from 'react'
+import { ProviderProps } from '../types'
 
 interface ISnackbarContext extends SnackbarProps {
 	openSnackbar: () => void
@@ -16,7 +17,7 @@ interface ISnackbarContext extends SnackbarProps {
 
 const snackbarContext = createContext<ISnackbarContext | null>(null)
 
-export const SnackbarProvider = ({ children }: { children: ReactNode }) => {
+export const SnackbarProvider = ({ children }: ProviderProps) => {
 	const [open, setOpen] = useState(false)
 	const [message, setMessage] = useState('')
 	const [anchorOrigin, setAnchorOrigin] = useState<
