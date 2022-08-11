@@ -1,14 +1,7 @@
 import { createContext, useContext, useState } from 'react'
 import { login as _login, logout as _logout } from '../api/user'
 import { ProviderProps } from '../types'
-
-export interface User {
-	id: number
-	vipType: number
-	userName: string
-	nickname: string
-	avatarUrl: string
-}
+import { User } from '../types/user'
 
 interface IContext {
 	user: User | null

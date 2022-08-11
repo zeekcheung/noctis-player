@@ -7,7 +7,7 @@ import {
 	TextFieldProps,
 } from '@mui/material'
 import { Box } from '@mui/system'
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../contexts/AuthProvider'
 import { useSnackbar } from '../../contexts/SnackbarProvider'
@@ -18,7 +18,7 @@ export default function Login() {
 	const passwordRef = useRef<HTMLInputElement>(null)
 
 	const { login } = useAuth()
-	const { openSnackbar, setMessage } = useSnackbar()
+	const { openSnackbar, closeSnackbar, setMessage } = useSnackbar()
 	const navigate = useNavigate()
 
 	const handleClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
@@ -35,6 +35,16 @@ export default function Login() {
 				})
 		}
 	}
+
+	useEffect(() => {
+		setMessage('请使用网易云音乐账号登录~')
+		openSnackbar()
+
+		return () => {
+			setMessage('')
+			closeSnackbar()
+		}
+	}, [closeSnackbar, openSnackbar, setMessage])
 
 	return (
 		<Container>

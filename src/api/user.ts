@@ -1,4 +1,4 @@
-import { User } from '../contexts/AuthProvider'
+import { User } from '../types/user'
 import { http } from './http'
 
 export const tokenKey = '__token__'

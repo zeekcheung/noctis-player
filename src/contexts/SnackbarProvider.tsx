@@ -5,7 +5,14 @@ import {
 	SnackbarOrigin,
 	SnackbarProps,
 } from '@mui/material'
-import { createContext, Dispatch, useContext, useState } from 'react'
+import {
+	createContext,
+	Dispatch,
+	useCallback,
+	useContext,
+	useMemo,
+	useState,
+} from 'react'
 import { ProviderProps } from '../types'
 
 interface ISnackbarContext extends SnackbarProps {
@@ -38,11 +45,12 @@ export const SnackbarProvider = ({ children }: ProviderProps) => {
 			value={{
 				open,
 				message,
-				anchorOrigin,
-				openSnackbar,
-				closeSnackbar,
-				setMessage,
-				setAnchorOrigin,
+				// 使用 useMemo 和 useCallback 解决依赖循环问题
+				anchorOrigin: useMemo(() => anchorOrigin, [anchorOrigin]),
+				openSnackbar: useCallback(openSnackbar, []),
+				closeSnackbar: useCallback(closeSnackbar, []),
+				setMessage: useCallback(setMessage, [setMessage]),
+				setAnchorOrigin: useCallback(setAnchorOrigin, [setAnchorOrigin]),
 			}}
 		>
 			{children}
