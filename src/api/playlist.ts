@@ -4,8 +4,8 @@ import { extractProps } from '../utils'
 import { http } from './http'
 
 // 歌单标签
-export type Cat = '华语' | '粤语' | '流行'
-const cats: Cat[] = ['粤语', '华语', '流行']
+export type Cat = '华语' | '粤语' | '欧美'
+export const cats: Cat[] = ['粤语', '华语', '欧美']
 
 // 获取歌单列表
 export const fetchPlayLists = (cat: Cat): Promise<Playlist[]> => {

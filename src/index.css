@@ -10,3 +10,28 @@ body,
 	padding: 0;
 	box-sizing: border-box;
 }
+
+/*滚动条宽高：必须设置宽高，滚动条的其他样式才会生效*/
+::-webkit-scrollbar {
+	width: 0.8rem;
+	height: 0.8rem;
+}
+
+/*滚动条轨道*/
+::-webkit-scrollbar-track {
+}
+
+/*滚动条滑块*/
+::-webkit-scrollbar-thumb {
+	background: rgba(256, 256, 256, 0.2);
+	max-height: 5rem;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: rgba(256, 256, 256, 0.3);
+}
+
+/*滚动条两端按钮*/
+::-webkit-scrollbar-button {
+	display: none;
+}

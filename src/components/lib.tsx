@@ -1,13 +1,12 @@
 import { Box, CircularProgress, Typography } from '@mui/material'
-import { ReactNode } from 'react'
+import { ProviderProps } from '../types'
 
-export const FullSizeMessage = ({ children }: { children: ReactNode }) => {
+export const FullSizeMessage = ({ children }: ProviderProps) => {
 	return (
 		<Box
 			sx={{
-				width: '100%',
-				height: '100vh',
 				display: 'flex',
+				flex: 1,
 				justifyContent: 'center',
 				alignItems: 'center',
 				fontSize: '2rem',
