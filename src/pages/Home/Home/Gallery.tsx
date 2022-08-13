@@ -2,11 +2,11 @@ import { Playlist } from '../../../types/playlist'
 import { Box } from '@mui/system'
 import styled from '@emotion/styled'
 import {
+	Button,
 	Card,
 	CardActionArea,
 	CardContent,
 	CardMedia,
-	Link,
 	Typography,
 } from '@mui/material'
 
@@ -21,7 +21,7 @@ export const Gallery = ({ title, playlists }: IGallery) => {
 			<Title title={title} />
 			<Main>
 				{playlists.map((playlist) => (
-					<PlaylistCard playlist={playlist} />
+					<PlaylistCard playlist={playlist} key={playlist.id} />
 				))}
 			</Main>
 		</Container>
@@ -29,7 +29,7 @@ export const Gallery = ({ title, playlists }: IGallery) => {
 }
 
 export const Container = styled(Box)`
-	flex: 0 0 auto;
+	width: 100%;
 `
 
 export const Title = ({ title }: { title: string }) => {
@@ -38,7 +38,6 @@ export const Title = ({ title }: { title: string }) => {
 			sx={{
 				display: 'flex',
 				justifyContent: 'space-between',
-				padding: '1.5em 2em 2em',
 			}}
 		>
 			<Typography
@@ -50,7 +49,7 @@ export const Title = ({ title }: { title: string }) => {
 			>
 				{title}
 			</Typography>
-			<Link>SEE ALL</Link>
+			<Button variant={'text'}>SEE ALL</Button>
 		</Box>
 	)
 }
@@ -58,13 +57,7 @@ export const Title = ({ title }: { title: string }) => {
 export const PlaylistCard = ({ playlist }: { playlist: Playlist }) => {
 	const { coverImgUrl, name, description } = playlist
 	return (
-		<Card
-			sx={{
-				/*maxWidth: "calc((100% - 10rem) / 4)" */
-				width: '12rem',
-				margin: '0 1.5rem',
-			}}
-		>
+		<Card>
 			<CardActionArea>
 				<CardMedia
 					component={'img'}
@@ -103,8 +96,9 @@ export const PlaylistCard = ({ playlist }: { playlist: Playlist }) => {
 }
 
 export const Main = styled.main`
-	display: flex;
-	flex-flow: row wrap;
-	justify-content: space-evenly;
-	padding: 0 1rem 1rem;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(9rem, 12rem));
+	grid-gap: 3rem;
+	//justify-content: center;
+	padding: 1.5rem 0;
 `

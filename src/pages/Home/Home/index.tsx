@@ -1,10 +1,11 @@
 import { Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import { ReactNode, useEffect } from 'react'
-import { useAllPlaylists } from '../../api/playlist'
-import { FullSizeLoading } from '../../components/lib'
+import { cats, useAllPlaylists } from '../../../api/playlist'
+import { FullSizeLoading } from '../../../components/lib'
+import { Gallery } from './Gallery'
 
-export default function Home() {
+export default function Index() {
 	const { data: allPlaylists, isLoading, isError, error } = useAllPlaylists()
 
 	useEffect(() => {
@@ -14,9 +15,17 @@ export default function Home() {
 	return isLoading ? (
 		<FullSizeLoading />
 	) : isError ? (
-		<Typography>{'error'}</Typography>
+		<Typography>{error?.message}</Typography>
 	) : (
-		<Container>home</Container>
+		<Container>
+			{allPlaylists.map((playlists, index) => (
+				<Gallery
+					title={cats[index] + '推荐歌单'}
+					playlists={playlists}
+					key={index}
+				/>
+			))}
+		</Container>
 	)
 }
 
@@ -24,12 +33,14 @@ export const Container = ({ children }: { children: ReactNode }) => {
 	return (
 		<Box
 			sx={{
-				height: `calc(100% - 4rem)`,
 				bgcolor: '#121212',
 				color: '#fff',
 				display: 'flex',
-				justifyContent: 'center',
+				flexDirection: 'column',
 				alignItems: 'center',
+				flex: 1,
+				overflow: 'overlay',
+				padding: '1.5rem 2rem',
 			}}
 			children={children}
 		/>
