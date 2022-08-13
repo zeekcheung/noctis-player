@@ -6,8 +6,8 @@ import { FullSizeLoading } from '../components/lib'
 const Home = lazy(() => import('../pages/Home'))
 const Login = lazy(() => import('../pages/Login'))
 const HomeTab = lazy(() => import('../pages/Home/Home'))
-const SearchTab = lazy(() => import('../pages/Home/Search/Search'))
-const LibraryTab = lazy(() => import('../pages/Home/Library/Library'))
+const SearchTab = lazy(() => import('../pages/Home/Search'))
+const LibraryTab = lazy(() => import('../pages/Home/Library'))
 
 export const Router = () => {
 	return (

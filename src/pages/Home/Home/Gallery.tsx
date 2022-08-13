@@ -97,8 +97,8 @@ export const PlaylistCard = ({ playlist }: { playlist: Playlist }) => {
 
 export const Main = styled.main`
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(9rem, 12rem));
-	grid-gap: 3rem;
-	//justify-content: center;
+	grid-template-columns: repeat(auto-fill, 12rem);
+	grid-gap: 2rem;
+	justify-content: space-around;
 	padding: 1.5rem 0;
 `

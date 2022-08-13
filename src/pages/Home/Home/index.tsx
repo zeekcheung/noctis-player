@@ -37,7 +37,6 @@ export const Container = ({ children }: { children: ReactNode }) => {
 				color: '#fff',
 				display: 'flex',
 				flexDirection: 'column',
-				alignItems: 'center',
 				flex: 1,
 				overflow: 'overlay',
 				padding: '1.5rem 2rem',

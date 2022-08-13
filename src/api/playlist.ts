@@ -35,5 +35,22 @@ export const fetchAllPlaylists = (): Promise<Playlist[][]> => {
 }
 
 export const useAllPlaylists = () => {
-	return useQuery(['allPlaylists'], fetchAllPlaylists)
+	return useQuery<Playlist[][], Error>(['allPlaylists'], fetchAllPlaylists)
+}
+
+// 获取歌单分类
+export const fetchCatchlist = (): Promise<string[]> => {
+	return new Promise((resolve, reject) => {
+		http
+			.get('/playlist/catlist')
+			.then((res) => {
+				const { sub } = res.data
+				resolve(sub.map((catData: { name: string }) => catData.name))
+			})
+			.catch((err) => reject(err.res.data))
+	})
+}
+
+export const useCatlist = () => {
+	return useQuery<string[], Error>(['catlist'], fetchCatchlist)
 }
