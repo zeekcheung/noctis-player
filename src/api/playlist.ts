@@ -4,7 +4,7 @@ import { extractProps } from '../utils'
 import { http } from './http'
 
 // 歌单标签
-export type Cat = '华语' | '粤语' | '欧美'
+export type Cat = '华语' | '粤语' | '欧美' | string
 export const cats: Cat[] = ['粤语', '华语', '欧美']
 
 // 获取歌单列表
@@ -39,7 +39,7 @@ export const useAllPlaylists = () => {
 }
 
 // 获取歌单分类
-export const fetchCatchlist = (): Promise<string[]> => {
+export const fetchCatlist = (): Promise<string[]> => {
 	return new Promise((resolve, reject) => {
 		http
 			.get('/playlist/catlist')
@@ -52,5 +52,5 @@ export const fetchCatchlist = (): Promise<string[]> => {
 }
 
 export const useCatlist = () => {
-	return useQuery<string[], Error>(['catlist'], fetchCatchlist)
+	return useQuery<string[], Error>(['catlist'], fetchCatlist)
 }

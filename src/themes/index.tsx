@@ -33,3 +33,6 @@ export const bgcolors = [
 	'#0288d1',
 	'#388e3c',
 ] as const
+
+export const getBgcolorByIndex = (index: number) =>
+	bgcolors[Math.floor(index % bgcolors.length)]

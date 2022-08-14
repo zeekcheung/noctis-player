@@ -2,7 +2,8 @@ import styled from '@emotion/styled'
 import { Typography } from '@mui/material'
 import { Main } from '../Home/Gallery'
 import { Box } from '@mui/system'
-import { bgcolors } from '../../../themes'
+import { getBgcolorByIndex } from '../../../themes'
+import { Cat } from '../../../api/playlist'
 
 export const Genre = ({ catlist }: { catlist: string[] }) => {
 	return (
@@ -30,41 +31,57 @@ export const Title = () => {
 	)
 }
 
-export const GenreCard = ({ cat, index }: { cat: string; index: number }) => {
+interface ICard {
+	index: number
+}
+
+interface IGenreCard extends ICard {
+	cat: Cat
+}
+
+export const GenreCard = ({ cat, index }: IGenreCard) => {
 	return (
-		<Box
-			sx={{
-				width: '13rem',
-				height: '13rem',
-				bgcolor: bgcolors[Math.floor(index % bgcolors.length)],
-				borderRadius: '.5rem',
-				padding: '1rem',
-				position: 'relative',
-				overflow: 'hidden',
-				'&:hover': {
-					cursor: 'pointer',
-				},
-				'&::after': {
-					display: 'box',
-					content: '""',
-					width: '6rem',
-					height: '6rem',
-					bgcolor: bgcolors[Math.floor((index + 1) % bgcolors.length)],
-					transform: 'rotate(30deg)',
-					position: 'absolute',
-					right: '-1rem',
-					bottom: '-1rem',
-				},
-			}}
+		<Card index={index}>
+			<CardTitle cat={cat} />
+		</Card>
+	)
+}
+
+export const Card = styled(Box)`
+	width: 13rem;
+	height: 13rem;
+	background-color: ${({ index }: ICard) => getBgcolorByIndex(index)};
+	border-radius: 0.5rem;
+	padding: 1rem;
+	position: relative;
+	overflow: hidden;
+
+	&:hover {
+		cursor: pointer;
+	}
+
+	&::after {
+		display: block;
+		content: '';
+		width: 6rem;
+		height: 6rem;
+		background-color: ${({ index }: ICard) => getBgcolorByIndex(index + 1)};
+		transform: rotate(30deg);
+		position: absolute;
+		right: -1rem;
+		bottom: -1rem;
+	}
+`
+
+export const CardTitle = ({ cat }: { cat: Cat }) => {
+	return (
+		<Typography
+			variant={'h3'}
+			color={'#000'}
+			fontSize={'1.5rem'}
+			fontWeight={'700'}
 		>
-			<Typography
-				variant={'h3'}
-				color={'#000'}
-				fontSize={'1.5rem'}
-				fontWeight={'700'}
-			>
-				{cat}
-			</Typography>
-		</Box>
+			{cat}
+		</Typography>
 	)
 }

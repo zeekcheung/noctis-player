@@ -1,21 +1,27 @@
 export interface Playlist {
 	id: string
 	name: string
-	userId: string
-	createTime: string
-	coverImgUrl: string
 	description: string
+	coverImgUrl: string
+	subscribedCount: number
+	trackCount: number
+	createTime: string
+	userId: string
 	tag: string
 	playCount: number
 }
 
-export const playlistKeys = [
+export type playlistKey = keyof Playlist
+
+export const playlistKeys: playlistKey[] = [
 	'id',
 	'name',
-	'userId',
-	'createTime',
-	'coverImgUrl',
 	'description',
+	'coverImgUrl',
+	'subscribedCount',
+	'trackCount',
+	'createTime',
+	'userId',
 	'tag',
 	'playCount',
 ]

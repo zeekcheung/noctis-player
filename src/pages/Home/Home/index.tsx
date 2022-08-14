@@ -6,7 +6,7 @@ import {
 	Typography,
 } from '@mui/material'
 import { Box } from '@mui/system'
-import { ReactNode, useEffect } from 'react'
+import { ReactNode } from 'react'
 import { cats, useAllPlaylists } from '../../../api/playlist'
 import { FullSizeLoading } from '../../../components/lib'
 import { Gallery } from './Gallery'
@@ -16,12 +16,8 @@ import GitHubIcon from '@mui/icons-material/GitHub'
 import TwitterIcon from '@mui/icons-material/Twitter'
 import LinkedInIcon from '@mui/icons-material/LinkedIn'
 
-export default function Index() {
+export default function Home() {
 	const { data: allPlaylists, isLoading, isError, error } = useAllPlaylists()
-
-	useEffect(() => {
-		console.log(allPlaylists)
-	}, [allPlaylists])
 
 	return isLoading ? (
 		<FullSizeLoading />

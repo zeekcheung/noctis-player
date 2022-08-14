@@ -18,11 +18,11 @@ Noctis Player 是一个基于 React、TypeScript 的音乐播放器。
 ### 技术栈
 
 - [React](https://github.com/facebook/react/)
-- [React Router]()
-- [React Query]()
-- [TypeScript]()
-- [Material UI]()
-- [Emotion]()
+- [React Router](https://reactrouter.com/)
+- [React Query](https://tanstack.com/query/v4)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Material UI](https://mui.com/)
+- [Emotion](https://emotion.sh/docs/introduction)
 - [Axios](https://axios-http.com/docs/intro)
 
 ## 演示截图
