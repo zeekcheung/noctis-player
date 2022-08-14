@@ -1,7 +1,6 @@
-import { Box, CircularProgress, Typography } from '@mui/material'
-import { ProviderProps } from '../types'
+import { Box, BoxProps, CircularProgress, Typography } from '@mui/material'
 
-export const FullSizeMessage = ({ children }: ProviderProps) => {
+export const FullSizeMessage = (props: BoxProps) => {
 	return (
 		<Box
 			sx={{
@@ -12,9 +11,8 @@ export const FullSizeMessage = ({ children }: ProviderProps) => {
 				fontSize: '2rem',
 				bgcolor: '#121212',
 			}}
-		>
-			{children}
-		</Box>
+			{...props}
+		/>
 	)
 }
 

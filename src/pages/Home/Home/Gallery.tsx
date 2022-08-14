@@ -1,7 +1,7 @@
 import { Playlist } from '../../../types/playlist'
-import { Box } from '@mui/system'
 import styled from '@emotion/styled'
 import {
+	Box,
 	Button,
 	Card,
 	CardActionArea,

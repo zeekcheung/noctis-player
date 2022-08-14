@@ -1,7 +1,8 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 import { fetchUserInfo, login as _login, logout as _logout } from '../api/user'
-import { ProviderProps } from '../types'
+
 import { User } from '../types/user'
+import { ProviderProps } from '../types'
 
 interface IContext {
 	user: User | null
