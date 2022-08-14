@@ -43,7 +43,7 @@ export const Container = ({ children }: { children: ReactNode }) => {
 				flexDirection: 'column',
 				flex: 1,
 				overflow: 'overlay',
-				padding: '1.5rem 2rem',
+				padding: '5.5rem 2rem 1.5rem',
 			}}
 		>
 			{children}

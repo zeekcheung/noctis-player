@@ -1,6 +1,12 @@
 import styled from '@emotion/styled'
-import { Button, ButtonGroup, SvgIcon } from '@mui/material'
-import { Box } from '@mui/system'
+import {
+	Box,
+	BoxProps,
+	Button,
+	ButtonGroup,
+	ButtonProps,
+	SvgIcon,
+} from '@mui/material'
 
 import Brightness7Icon from '@mui/icons-material/Brightness7'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
@@ -21,7 +27,7 @@ export default function Home() {
 				<NavBar />
 			</SideBar>
 			<Main>
-				<HeadBar />
+				<HeaderBar />
 				<Outlet />
 			</Main>
 		</Container>
@@ -41,10 +47,26 @@ const SideBar = styled.aside`
 	padding: 1.5rem;
 `
 
-export const Logo = ({ btnSx, iconSx }: { btnSx?: SX; iconSx?: SX }) => {
+interface ILogo {
+	btnSx?: SX
+	iconSx?: SX
+}
+
+export const Logo = ({ btnSx, iconSx }: ILogo) => {
 	const navigate = useNavigate()
 	const handleClick = () => navigate('/')
 
+	return (
+		<LogoButton onClick={handleClick} btnSx={btnSx}>
+			<Brightness7Icon
+				sx={{ fontSize: '2.5rem', marginRight: '5px', ...iconSx }}
+			/>
+			Noctis
+		</LogoButton>
+	)
+}
+
+const LogoButton = ({ btnSx, ...props }: ButtonProps & ILogo) => {
 	return (
 		<Button
 			sx={{
@@ -56,13 +78,8 @@ export const Logo = ({ btnSx, iconSx }: { btnSx?: SX; iconSx?: SX }) => {
 				padding: 0,
 				...btnSx,
 			}}
-			onClick={handleClick}
-		>
-			<Brightness7Icon
-				sx={{ fontSize: '2.5rem', marginRight: '5px', ...iconSx }}
-			/>
-			Noctis
-		</Button>
+			{...props}
+		/>
 	)
 }
 
@@ -76,18 +93,25 @@ const NavBar = () => {
 	)
 }
 
-const NavIcon = ({
-	Icon,
-	text,
-	to,
-}: {
+interface INavIcon {
 	Icon: typeof SvgIcon
 	text: string
 	to: string
-}) => {
+}
+
+const NavIcon = ({ Icon, text, to }: INavIcon) => {
 	const navigate = useNavigate()
 	const handleClick = () => navigate(to)
 
+	return (
+		<NavIconButton onClick={handleClick}>
+			<Icon sx={{ fontSize: '2rem', marginRight: '.8rem' }} />
+			{text}
+		</NavIconButton>
+	)
+}
+
+const NavIconButton = (props: ButtonProps) => {
 	return (
 		<Button
 			sx={{
@@ -104,11 +128,8 @@ const NavIcon = ({
 					color: '#fff',
 				},
 			}}
-			onClick={handleClick}
-		>
-			<Icon sx={{ fontSize: '2rem', marginRight: '.8rem' }} />
-			{text}
-		</Button>
+			{...props}
+		/>
 	)
 }
 
@@ -116,36 +137,47 @@ const Main = styled.main`
 	flex: 1;
 	display: flex;
 	flex-direction: column;
+	position: relative;
 `
 
-const HeadBar = () => {
+const HeaderBar = () => {
+	return (
+		<HeaderContainer>
+			<ButtonGroup>
+				<NavigateButton Icon={ChevronLeftIcon} type={'back'} />
+				<NavigateButton Icon={ChevronRightIcon} type={'forward'} />
+			</ButtonGroup>
+			<LogButton />
+		</HeaderContainer>
+	)
+}
+
+const HeaderContainer = (props: BoxProps) => {
 	return (
 		<Box
 			sx={{
 				display: 'flex',
 				justifyContent: 'space-between',
 				bgcolor: '#090909',
+				opacity: '.8',
 				height: '4rem',
 				padding: '.5rem 1.5rem',
-				position: 'sticky',
+				position: 'absolute',
+				left: '0',
+				right: '.8rem',
+				zIndex: '10',
 			}}
-		>
-			<ButtonGroup>
-				<NavigateButton Icon={ChevronLeftIcon} type={'back'} />
-				<NavigateButton Icon={ChevronRightIcon} type={'forward'} />
-			</ButtonGroup>
-			<LogButton />
-		</Box>
+			{...props}
+		/>
 	)
 }
 
-const NavigateButton = ({
-	Icon,
-	type,
-}: {
+interface INavigateButton {
 	Icon: typeof SvgIcon
 	type: 'forward' | 'back'
-}) => {
+}
+
+const NavigateButton = ({ Icon, type }: INavigateButton) => {
 	const handleClick = () => {
 		if (type === 'forward') {
 			window.history.forward()
@@ -186,6 +218,10 @@ const LogButton = () => {
 		}
 	}
 
+	return <LogBaseButton onClick={handleClick}>{content}</LogBaseButton>
+}
+
+export const LogBaseButton = (props: ButtonProps) => {
 	return (
 		<Button
 			variant="contained"
@@ -201,9 +237,7 @@ const LogButton = () => {
 					bgcolor: '#ddd',
 				},
 			}}
-			onClick={handleClick}
-		>
-			{content}
-		</Button>
+			{...props}
+		/>
 	)
 }

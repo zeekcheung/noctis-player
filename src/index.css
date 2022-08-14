@@ -24,7 +24,6 @@ body,
 /*滚动条滑块*/
 ::-webkit-scrollbar-thumb {
 	background: rgba(256, 256, 256, 0.2);
-	max-height: 5rem;
 }
 
 ::-webkit-scrollbar-thumb:hover {
