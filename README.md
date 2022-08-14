@@ -1,12 +1,11 @@
-<div align="center">
-  <a href="#">
-    <img src="./public/logo.png" alt="Logo" width="120">
-  </a>
+<div style="text-align: center">
+    <img alt="logo.png" src="./public/logo.png" 
+width="200px"/>
 
-  <p align="center">
-    <a href="https://github.com/othneildrew/Best-README-Template">演示✨</a>
+  <p style="text-align: center">
+    <a href="https://noctis-player-8cwdkokb2-zeekcheung.vercel.app/">演示✨</a>
     |
-    <a href="https://github.com/othneildrew/Best-README-Template">文档📦</a>
+    <a href="https://github.com/zeekcheung/noctis-player">文档📦</a>
   </p>
 </div>
 
@@ -19,11 +18,11 @@ Noctis Player 是一个基于 React、TypeScript 的音乐播放器。
 ### 技术栈
 
 - [React](https://github.com/facebook/react/)
-- [React Router][react router]
-- [React Query][react query]]
-- [TypeScript][typescript]
-- [Material UI][material ui]
-- [Emotion][emotion]
+- [React Router]()
+- [React Query]()
+- [TypeScript]()
+- [Material UI]()
+- [Emotion]()
 - [Axios](https://axios-http.com/docs/intro)
 
 ## 演示截图
@@ -38,7 +37,7 @@ Noctis Player 是一个基于 React、TypeScript 的音乐播放器。
   - [x] 推荐华语音乐
   - [x] 推荐流行音乐
 - [ ] 搜索页
-  - [ ] 歌单分类
+  - [x] 歌单分类
   - [ ] 精品歌单
   - [ ] 搜索建议
   - [ ] 搜索关键词（音乐、歌手...）
