@@ -15,24 +15,21 @@ import styled from '@emotion/styled'
 import GitHubIcon from '@mui/icons-material/GitHub'
 import TwitterIcon from '@mui/icons-material/Twitter'
 import LinkedInIcon from '@mui/icons-material/LinkedIn'
+import { ProviderProps } from '../../../types'
 
 export default function Home() {
 	const { data: allPlaylists, isLoading, isError, error } = useAllPlaylists()
 
-	return isLoading ? (
-		<FullSizeLoading />
-	) : isError ? (
-		<Typography>{error?.message}</Typography>
-	) : (
-		<Container>
-			{allPlaylists.map((playlists, index) => (
+	return (
+		<ContainerWithLoading isLoading={isLoading} isError={isError} error={error}>
+			{(allPlaylists || []).map((playlists, index) => (
 				<Gallery
 					title={cats[index] + '推荐歌单'}
 					playlists={playlists}
 					key={index}
 				/>
 			))}
-		</Container>
+		</ContainerWithLoading>
 	)
 }
 
@@ -176,3 +173,24 @@ export const Link = styled(MuiLink)`
 		color: #fff;
 	}
 `
+
+interface IContainerWithLoading extends ProviderProps {
+	isLoading: boolean
+	isError: boolean
+	error: Error | null
+}
+
+export const ContainerWithLoading = ({
+	isLoading,
+	isError,
+	error,
+	children,
+}: IContainerWithLoading) => {
+	return isLoading ? (
+		<FullSizeLoading />
+	) : isError ? (
+		<Typography>{error?.message}</Typography>
+	) : (
+		<Container children={children} />
+	)
+}

@@ -9,6 +9,7 @@ import {
 	CardMedia,
 	Typography,
 } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 
 interface IGallery {
 	title: string
@@ -55,9 +56,15 @@ export const Title = ({ title }: { title: string }) => {
 }
 
 export const PlaylistCard = ({ playlist }: { playlist: Playlist }) => {
-	const { coverImgUrl, name, description } = playlist
+	const { coverImgUrl, name, description, id } = playlist
+	const navigate = useNavigate()
+
+	const handleClick = () => {
+		navigate(`/playlistDetail/${id}`)
+	}
+
 	return (
-		<Card>
+		<Card onClick={handleClick}>
 			<CardActionArea>
 				<CardMedia
 					component={'img'}
@@ -66,32 +73,44 @@ export const PlaylistCard = ({ playlist }: { playlist: Playlist }) => {
 					alt={name}
 				/>
 				<CardContent sx={{ bgcolor: '' }}>
-					<Typography
-						gutterBottom
-						variant={'h3'}
-						sx={{
-							fontSize: '1.2rem',
-							height: '1em',
-							overflow: 'hidden',
-							textOverflow: 'ellipsis',
-						}}
-					>
-						{name}
-					</Typography>
-					<Typography
-						variant={'body2'}
-						sx={{
-							fontWeight: '200',
-							height: '2.8em',
-							overflow: 'hidden',
-							textOverflow: 'ellipsis',
-						}}
-					>
-						{description}
-					</Typography>
+					<PlaylistCardTitle title={name} />
+					<PlaylistCardContent content={description} />
 				</CardContent>
 			</CardActionArea>
 		</Card>
+	)
+}
+
+export const PlaylistCardTitle = ({ title }: { title: string }) => {
+	return (
+		<Typography
+			gutterBottom
+			variant={'h3'}
+			sx={{
+				fontSize: '1.2rem',
+				height: '1em',
+				overflow: 'hidden',
+				textOverflow: 'ellipsis',
+			}}
+		>
+			{title}
+		</Typography>
+	)
+}
+
+export const PlaylistCardContent = ({ content }: { content: string }) => {
+	return (
+		<Typography
+			variant={'body2'}
+			sx={{
+				fontWeight: '200',
+				height: '2.8em',
+				overflow: 'hidden',
+				textOverflow: 'ellipsis',
+			}}
+		>
+			{content}
+		</Typography>
 	)
 }
 
