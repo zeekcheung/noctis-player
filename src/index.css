@@ -1,7 +1,6 @@
 html,
 body,
-#root,
-.App {
+#root {
 	height: 100vh;
 }
 

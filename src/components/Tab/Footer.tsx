@@ -9,7 +9,7 @@ import {
 import GitHubIcon from '@mui/icons-material/GitHub'
 import TwitterIcon from '@mui/icons-material/Twitter'
 import LinkedInIcon from '@mui/icons-material/LinkedIn'
-import styled from '@emotion/styled/dist/emotion-styled.cjs'
+import styled from '@emotion/styled'
 
 export const Footer = () => {
 	const topLinks = {

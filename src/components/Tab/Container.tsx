@@ -1,7 +1,7 @@
 import { Box, BoxProps } from '@mui/material'
 import { Footer } from './Footer'
 
-export const Container = (props: BoxProps) => {
+export const Container = ({ children, ...props }: BoxProps) => {
 	return (
 		<Box
 			sx={{
@@ -15,6 +15,7 @@ export const Container = (props: BoxProps) => {
 			}}
 			{...props}
 		>
+			{children}
 			<Footer />
 		</Box>
 	)

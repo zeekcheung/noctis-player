@@ -24,9 +24,9 @@ export const FullSizeError = ({ error }: { error: Error }) => {
 	)
 }
 
-export const FullSizeLoading = () => {
+export const FullSizeLoading = (props: BoxProps) => {
 	return (
-		<FullSizeMessage>
+		<FullSizeMessage {...props}>
 			<CircularProgress />
 		</FullSizeMessage>
 	)
