@@ -26,9 +26,7 @@ export const fetchPlayLists = (cat: Cat, limit: number = 50) => {
 					)
 				)
 			})
-			.catch((err) => {
-				reject(err.response.data)
-			})
+			.catch(reject)
 	})
 }
 
@@ -53,7 +51,7 @@ export const fetchCatlist = () => {
 				const { sub } = res.data
 				resolve(sub.map((catData: { name: string }) => catData.name))
 			})
-			.catch((err) => reject(err.res.data))
+			.catch(reject)
 	})
 }
 
@@ -72,9 +70,7 @@ export const fetchPlaylistById = (id: string) => {
 				const { playlist } = res.data
 				resolve(extractProps(playlist, playlistKeys) as Playlist)
 			})
-			.catch((err) => {
-				reject(err.res.data)
-			})
+			.catch(reject)
 	})
 }
 
@@ -108,9 +104,7 @@ export const fetchAllSongsById = (playlistId: string) => {
 
 				resolve(songs)
 			})
-			.catch((err) => {
-				reject(err.res.data)
-			})
+			.catch(reject)
 	})
 }
 
