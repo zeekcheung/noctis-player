@@ -1,5 +1,4 @@
 import {
-	Box,
 	BoxProps,
 	Button,
 	ButtonGroup,
@@ -11,6 +10,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 import { useAuth, useUser } from '../../contexts/AuthProvider'
 import { useSnackbar } from '../../contexts/SnackbarProvider'
 import { useNavigate } from 'react-router-dom'
+import { StyledFlexBox } from '../lib'
 
 export const HeaderBar = () => {
 	return (
@@ -26,10 +26,8 @@ export const HeaderBar = () => {
 
 const Container = (props: BoxProps) => {
 	return (
-		<Box
+		<StyledFlexBox
 			sx={{
-				display: 'flex',
-				justifyContent: 'space-between',
 				bgcolor: '#090909',
 				opacity: '.8',
 				height: '4rem',

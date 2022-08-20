@@ -1,6 +1,7 @@
-import { cats, useAllPlaylists } from '../../../api/playlist'
+import { useAllPlaylists } from '../../../api/playlist'
 import { Gallery } from './Gallery'
 import { Tab } from '../../../components/Tab'
+import { cats } from '../../../types/playlist'
 
 export default function Home() {
 	const { data: allPlaylists, isLoading, isError, error } = useAllPlaylists()

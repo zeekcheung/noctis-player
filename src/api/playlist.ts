@@ -1,18 +1,22 @@
 import { useQuery } from '@tanstack/react-query'
-import { Playlist, playlistKeys } from '../types/playlist'
+import { PlainObject } from '../types'
+import {
+	Cat,
+	cats,
+	Playlist,
+	playlistKeys,
+	Song,
+	songRespKeys,
+} from '../types/playlist'
 import { extractProps } from '../utils'
 import { http } from './http'
 
-// 歌单标签
-export type Cat = '华语' | '粤语' | '欧美' | string
-export const cats: Cat[] = ['粤语', '华语', '欧美']
-
 // 获取歌单列表
-export const fetchPlayLists = (cat: Cat): Promise<Playlist[]> => {
-	return new Promise((resolve, reject) => {
+export const fetchPlayLists = (cat: Cat, limit: number = 50) => {
+	return new Promise<Playlist[]>((resolve, reject) => {
 		http
 			.get(`/top/playlist/highquality`, {
-				params: { cat, limit: 4 },
+				params: { cat, limit },
 			})
 			.then((res) => {
 				const { playlists } = res.data
@@ -30,7 +34,9 @@ export const fetchPlayLists = (cat: Cat): Promise<Playlist[]> => {
 
 // 获取首页推荐歌单列表
 export const fetchAllPlaylists = (): Promise<Playlist[][]> => {
-	const promises: Promise<Playlist[]>[] = cats.map((cat) => fetchPlayLists(cat))
+	const promises: Promise<Playlist[]>[] = cats.map((cat) =>
+		fetchPlayLists(cat, 4)
+	)
 	return Promise.all(promises)
 }
 
@@ -39,8 +45,8 @@ export const useAllPlaylists = () => {
 }
 
 // 获取歌单分类
-export const fetchCatlist = (): Promise<string[]> => {
-	return new Promise((resolve, reject) => {
+export const fetchCatlist = () => {
+	return new Promise<string[]>((resolve, reject) => {
 		http
 			.get('/playlist/catlist')
 			.then((res) => {
@@ -53,4 +59,63 @@ export const fetchCatlist = (): Promise<string[]> => {
 
 export const useCatlist = () => {
 	return useQuery<string[], Error>(['catlist'], fetchCatlist)
+}
+
+// 获取歌单详情
+export const fetchPlaylistById = (id: string) => {
+	return new Promise<Playlist>((resolve, reject) => {
+		http
+			.get('/playlist/detail', {
+				params: { id },
+			})
+			.then((res) => {
+				const { playlist } = res.data
+				resolve(extractProps(playlist, playlistKeys) as Playlist)
+			})
+			.catch((err) => {
+				reject(err.res.data)
+			})
+	})
+}
+
+export const usePlaylist = (id: string) => {
+	return useQuery<Playlist, Error>(['playlist'], () => fetchPlaylistById(id))
+}
+
+// 获取歌单所有歌曲
+export const fetchAllSongsById = (playlistId: string) => {
+	return new Promise<Song[]>((resolve, reject) => {
+		http
+			.get('/playlist/track/all', {
+				params: { id: playlistId },
+			})
+			.then((res) => {
+				const songsRes = res.data.songs as PlainObject[]
+
+				const songs: Song[] = songsRes.map((song) => {
+					const { id, name, ar, al, publishTime } = extractProps(
+						song,
+						songRespKeys
+					)
+					return {
+						id,
+						name,
+						artist: { id: ar[0].id, name: ar[0].name },
+						album: { id: al.id, name: al.name, picUrl: al.picUrl },
+						publishTime,
+					}
+				})
+
+				resolve(songs)
+			})
+			.catch((err) => {
+				reject(err.res.data)
+			})
+	})
+}
+
+export const useAllSongs = (playlistId: string) => {
+	return useQuery<Song[], Error>(['allSongs'], () =>
+		fetchAllSongsById(playlistId)
+	)
 }

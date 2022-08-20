@@ -1,4 +1,11 @@
-import { Box, BoxProps, CircularProgress, Typography } from '@mui/material'
+import {
+	Box,
+	BoxProps,
+	CircularProgress,
+	Link as MuiLink,
+	styled,
+	Typography,
+} from '@mui/material'
 
 export const FullSizeMessage = (props: BoxProps) => {
 	return (
@@ -31,3 +38,26 @@ export const FullSizeLoading = (props: BoxProps) => {
 		</FullSizeMessage>
 	)
 }
+
+export const CustomLink = styled(MuiLink)`
+	display: block;
+	text-decoration-line: none;
+	cursor: pointer;
+	font-family: var(--font-family, spotify-circular), Helvetica, Arial,
+		sans-serif;
+
+	&:hover {
+		text-decoration-line: underline;
+		color: #fff;
+	}
+`
+
+export const FlexBox = styled(Box)`
+	display: flex;
+`
+
+export const StyledFlexBox = styled(Box)`
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+`
