@@ -1,9 +1,6 @@
-import { Button, ButtonGroup, ButtonProps, SvgIcon } from '@mui/material'
-import { Logo } from '../Logo'
+import { Box, SvgIcon } from '@mui/material'
+import { HomeIcon, LibraryIcon, Logo, SearchIcon } from '../Icon'
 import styled from '@emotion/styled'
-import HomeIcon from '@mui/icons-material/Home'
-import SearchIcon from '@mui/icons-material/Search'
-import LibraryMusicIcon from '@mui/icons-material/LibraryMusic'
 import { useNavigate } from 'react-router-dom'
 
 export const SideBar = () => {
@@ -19,16 +16,16 @@ const Container = styled.aside`
 	width: 15rem;
 	height: 100vh;
 	background-color: #000;
-	padding: 1.5rem;
+	padding: 24px;
 `
 
 const NavBar = () => {
 	return (
-		<ButtonGroup orientation="vertical" sx={{ marginTop: '1.5rem' }} fullWidth>
+		<Box sx={{ marginTop: '1.5rem' }}>
 			<NavIcon Icon={HomeIcon} text={'Home'} to={'/home'} />
 			<NavIcon Icon={SearchIcon} text={'Search'} to={'/search'} />
-			<NavIcon Icon={LibraryMusicIcon} text={'Library'} to={'/library'} />
-		</ButtonGroup>
+			<NavIcon Icon={LibraryIcon} text={'Library'} to={'/library'} />
+		</Box>
 	)
 }
 
@@ -44,30 +41,30 @@ const NavIcon = ({ Icon, text, to }: INavIcon) => {
 
 	return (
 		<NavIconButton onClick={handleClick}>
-			<Icon sx={{ fontSize: '2rem', marginRight: '.8rem' }} />
-			{text}
+			<Icon />
+			<span>{text}</span>
 		</NavIconButton>
 	)
 }
 
-const NavIconButton = (props: ButtonProps) => {
-	return (
-		<Button
-			sx={{
-				justifyContent: 'flex-start',
-				textTransform: 'none',
-				fontSize: '1rem',
-				fontWeight: '700',
-				fontFamily:
-					'var(--font-family,CircularSp,CircularSp-Arab,CircularSp-Hebr,CircularSp-Cyrl,CircularSp-Grek,CircularSp-Deva,var(--fallback-fonts,sans-serif))',
-				paddingLeft: '0',
-				borderWidth: '0',
-				'&:hover': {
-					borderWidth: '0',
-					color: '#fff',
-				},
-			}}
-			{...props}
-		/>
-	)
-}
+const NavIconButton = styled.a`
+	height: 40px;
+	border-radius: 4px;
+	cursor: pointer;
+	display: flex;
+	gap: 16px;
+	align-items: center;
+	color: #b3b3b3;
+	font-weight: 700;
+	font-size: 0.875rem;
+	-webkit-transition-duration: 0.2s;
+	-moz-transition-duration: 0.2s;
+	-o-transition-duration: 0.2s;
+	transition-duration: 0.2s;
+	transition-property: color;
+	transition-timing-function: linear;
+
+	& > :hover {
+		color: #fff;
+	}
+`

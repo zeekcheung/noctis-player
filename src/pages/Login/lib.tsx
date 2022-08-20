@@ -8,7 +8,7 @@ import {
 	TextField,
 	TextFieldProps,
 } from '@mui/material'
-import { Logo as BaseLogo } from '../../components/Logo'
+import { Logo as BaseLogo } from '../../components/Icon'
 
 export const Container = styled(Box)`
 	width: 100vw;

@@ -1,19 +1,120 @@
+a,
+abbr,
+acronym,
+address,
+applet,
+article,
+aside,
+audio,
+b,
+big,
+blockquote,
+body,
+canvas,
+caption,
+center,
+cite,
+code,
+dd,
+del,
+details,
+dfn,
+div,
+dl,
+dt,
+em,
+embed,
+fieldset,
+figcaption,
+figure,
+footer,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+header,
+hgroup,
+html,
+i,
+iframe,
+img,
+ins,
+kbd,
+label,
+legend,
+li,
+mark,
+menu,
+nav,
+object,
+ol,
+output,
+p,
+pre,
+q,
+ruby,
+s,
+samp,
+section,
+small,
+span,
+strike,
+strong,
+sub,
+summary,
+sup,
+table,
+tbody,
+td,
+tfoot,
+th,
+thead,
+time,
+tr,
+tt,
+u,
+ul,
+var,
+video {
+	border: 0;
+	margin: 0;
+	padding: 0;
+	vertical-align: baseline;
+}
+
+* {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
 html,
 body,
 #root {
 	height: 100vh;
 }
 
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+html {
+	--fallback-fonts: Helvetica Neue, helvetica, arial, Hiragino Kaku Gothic Pro,
+		Meiryo, MS Gothic;
+}
+
+body {
+	font-family: CircularSp, CircularSp-Arab, CircularSp-Hebr, CircularSp-Cyrl,
+		CircularSp-Grek, CircularSp-Deva, var(--fallback-fonts, sans-serif),
+		sans-serif;
 }
 
 /*滚动条宽高：必须设置宽高，滚动条的其他样式才会生效*/
 ::-webkit-scrollbar {
-	width: 0.8rem;
-	height: 0.8rem;
+	width: 16px;
+}
+
+::-webkit-scrollbar-corner {
+	background-color: transparent;
 }
 
 /*滚动条轨道*/
@@ -22,14 +123,43 @@ body,
 
 /*滚动条滑块*/
 ::-webkit-scrollbar-thumb {
-	background: rgba(256, 256, 256, 0.2);
-}
-
-::-webkit-scrollbar-thumb:hover {
-	background: rgba(256, 256, 256, 0.3);
+	background-color: hsla(0, 0%, 100%, 0.3);
 }
 
 /*滚动条两端按钮*/
 ::-webkit-scrollbar-button {
 	display: none;
+}
+
+/*主题色*/
+.encore-dark-theme,
+.encore-dark-theme .encore-base-set {
+	--background-base: #121212;
+	--background-highlight: #1a1a1a;
+	--background-press: #000;
+	--background-elevated-base: #242424;
+	--background-elevated-highlight: #2a2a2a;
+	--background-elevated-press: #000;
+	--background-tinted-base: hsla(0, 0%, 100%, 0.07);
+	--background-tinted-highlight: hsla(0, 0%, 100%, 0.1);
+	--background-tinted-press: hsla(0, 0%, 100%, 0.04);
+	--background-unsafe-for-small-text-base: #121212;
+	--background-unsafe-for-small-text-highlight: #121212;
+	--background-unsafe-for-small-text-press: #121212;
+	--text-base: #fff;
+	--text-subdued: #a7a7a7;
+	--text-bright-accent: #1ed760;
+	--text-negative: #f15e6c;
+	--text-warning: #ffa42b;
+	--text-positive: #1ed760;
+	--text-announcement: #3d91f4;
+	--essential-base: #fff;
+	--essential-subdued: #727272;
+	--essential-bright-accent: #1ed760;
+	--essential-negative: #e91429;
+	--essential-warning: #ffa42b;
+	--essential-positive: #1ed760;
+	--essential-announcement: #0d72ea;
+	--decorative-base: #fff;
+	--decorative-subdued: #292929;
 }
