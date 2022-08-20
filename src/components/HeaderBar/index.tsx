@@ -11,6 +11,7 @@ import { useAuth, useUser } from '../../contexts/AuthProvider'
 import { useSnackbar } from '../../contexts/SnackbarProvider'
 import { useNavigate } from 'react-router-dom'
 import { StyledFlexBox } from '../lib'
+import { useQueryClient } from '@tanstack/react-query'
 
 export const HeaderBar = () => {
 	return (
@@ -29,12 +30,12 @@ const Container = (props: BoxProps) => {
 		<StyledFlexBox
 			sx={{
 				bgcolor: '#090909',
-				opacity: '.8',
+				opacity: 0.8,
 				height: '4rem',
 				padding: '.5rem 1.5rem',
 				position: 'absolute',
-				left: '0',
-				right: '.8rem',
+				left: 0,
+				right: 0,
 				zIndex: '10',
 			}}
 			{...props}
@@ -48,11 +49,17 @@ interface INavigateButton {
 }
 
 const NavigateButton = ({ Icon, type }: INavigateButton) => {
+	const queryClient = useQueryClient()
+
 	const handleClick = () => {
 		if (type === 'forward') {
 			window.history.forward()
 		}
 		window.history.back()
+
+		// 退出详情页时清除缓存
+		queryClient.removeQueries(['playlist'])
+		queryClient.removeQueries(['allSongs'])
 	}
 
 	return (
