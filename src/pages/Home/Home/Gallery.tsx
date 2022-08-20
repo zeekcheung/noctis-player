@@ -10,6 +10,7 @@ import {
 	Typography,
 } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
+import { StyledFlexBox } from '../../../components/lib'
 
 interface IGallery {
 	title: string
@@ -35,10 +36,9 @@ export const Container = styled(Box)`
 
 export const Title = ({ title }: { title: string }) => {
 	return (
-		<Box
+		<StyledFlexBox
 			sx={{
-				display: 'flex',
-				justifyContent: 'space-between',
+				alignItems: 'normal',
 			}}
 		>
 			<Typography
@@ -51,7 +51,7 @@ export const Title = ({ title }: { title: string }) => {
 				{title}
 			</Typography>
 			<Button variant={'text'}>SEE ALL</Button>
-		</Box>
+		</StyledFlexBox>
 	)
 }
 

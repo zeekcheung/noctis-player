@@ -1,15 +1,10 @@
-import { Box } from '@mui/system'
-import {
-	ButtonGroup,
-	Divider,
-	IconButton,
-	Link as MuiLink,
-	Typography,
-} from '@mui/material'
-import GitHubIcon from '@mui/icons-material/GitHub'
-import TwitterIcon from '@mui/icons-material/Twitter'
-import LinkedInIcon from '@mui/icons-material/LinkedIn'
 import styled from '@emotion/styled'
+import GitHubIcon from '@mui/icons-material/GitHub'
+import LinkedInIcon from '@mui/icons-material/LinkedIn'
+import TwitterIcon from '@mui/icons-material/Twitter'
+import { ButtonGroup, Divider, IconButton, Typography } from '@mui/material'
+import { Box } from '@mui/system'
+import { CustomLink, StyledFlexBox } from '../lib'
 
 export const Footer = () => {
 	const topLinks = {
@@ -79,7 +74,7 @@ export const TopLinkGroup = (props: { title: string; linklist: string[] }) => {
 			<Ul style={{ flexDirection: 'column' }}>
 				{linklist.map((link) => (
 					<li key={link}>
-						<Link>{link}</Link>
+						<FooterLink>{link}</FooterLink>
 					</li>
 				))}
 			</Ul>
@@ -92,7 +87,7 @@ export const BottomLinkGroup = ({ linklist }: { linklist: string[] }) => {
 		<Ul>
 			{linklist.map((link) => (
 				<li key={link}>
-					<Link fontSize={'.9em'}>{link}</Link>
+					<FooterLink fontSize={'.9em'}>{link}</FooterLink>
 				</li>
 			))}
 		</Ul>
@@ -104,31 +99,18 @@ export const Ul = styled.ul`
 	display: flex;
 `
 
-export const FooterTopBox = styled(Box)`
-	display: flex;
+export const FooterTopBox = styled(StyledFlexBox)`
 	align-items: flex-start;
-	justify-content: space-between;
 	flex-wrap: wrap;
 	padding: 2em 0;
 `
 
-export const FooterBottomBox = styled(Box)`
-	display: flex;
-	justify-content: space-between;
+export const FooterBottomBox = styled(StyledFlexBox)`
+	align-items: normal;
 	padding-top: 2rem;
 `
 
-export const Link = styled(MuiLink)`
-	display: block;
-	text-decoration-line: none;
-	cursor: pointer;
+export const FooterLink = styled(CustomLink)`
 	padding-top: 1em;
 	padding-right: 1rem;
-	font-family: var(--font-family, spotify-circular), Helvetica, Arial,
-		sans-serif;
-
-	&:hover {
-		text-decoration-line: underline;
-		color: #fff;
-	}
 `

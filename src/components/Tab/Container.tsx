@@ -1,13 +1,13 @@
-import { Box, BoxProps } from '@mui/material'
+import { BoxProps } from '@mui/material'
 import { Footer } from './Footer'
+import { FlexBox } from '../lib'
 
 export const Container = ({ children, ...props }: BoxProps) => {
 	return (
-		<Box
+		<FlexBox
 			sx={{
 				bgcolor: '#121212',
 				color: '#fff',
-				display: 'flex',
 				flexDirection: 'column',
 				flex: 1,
 				overflow: 'overlay',
@@ -17,6 +17,6 @@ export const Container = ({ children, ...props }: BoxProps) => {
 		>
 			{children}
 			<Footer />
-		</Box>
+		</FlexBox>
 	)
 }

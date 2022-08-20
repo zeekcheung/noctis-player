@@ -3,7 +3,8 @@ import { Typography } from '@mui/material'
 import { Main } from '../Home/Gallery'
 import { Box } from '@mui/system'
 import { getBgcolorByIndex } from '../../../themes'
-import { Cat } from '../../../api/playlist'
+import { fetchPlayLists } from '../../../api/playlist'
+import { Cat } from '../../../types/playlist'
 
 export const Genre = ({ catlist }: { catlist: string[] }) => {
 	return (
@@ -40,8 +41,12 @@ interface IGenreCard extends ICard {
 }
 
 export const GenreCard = ({ cat, index }: IGenreCard) => {
+	const handleClick = () => {
+		console.log(cat)
+		fetchPlayLists(cat).then((playlist) => console.log(playlist))
+	}
 	return (
-		<Card index={index}>
+		<Card index={index} onClick={handleClick}>
 			<CardTitle cat={cat} />
 		</Card>
 	)

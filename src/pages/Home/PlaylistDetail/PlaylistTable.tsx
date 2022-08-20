@@ -81,8 +81,6 @@ const columns: readonly Column[] = [
 				sx={{
 					fontSize: '1rem',
 					fontWeight: '400',
-					fontFamily: `var(--font-family,CircularSp,CircularSp-Arab,CircularSp-Hebr,
-					CircularSp-Cyrl,CircularSp-Grek,CircularSp-Deva,var(--fallback-fonts,sans-serif))`,
 				}}
 			>
 				{index}

@@ -1,7 +1,8 @@
-import { ComponentProps } from 'react'
+import { ComponentProps, useEffect } from 'react'
 import { FullSizeLoading } from '../lib'
 import { Typography } from '@mui/material'
 import { Container } from './Container'
+import { addScrollEvent, removeScrollEvent } from '../../utils'
 
 interface ITab extends ComponentProps<typeof Container> {
 	isLoading: boolean
@@ -10,6 +11,14 @@ interface ITab extends ComponentProps<typeof Container> {
 }
 
 export const Tab = (props: ITab) => {
+	useEffect(() => {
+		addScrollEvent()
+
+		return () => {
+			removeScrollEvent()
+		}
+	}, [])
+
 	const { isLoading, isError, error, children } = props
 
 	return isLoading ? (
