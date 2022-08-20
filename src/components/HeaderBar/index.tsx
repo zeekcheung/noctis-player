@@ -53,6 +53,10 @@ const NavigateButton = ({ Icon, type }: INavigateButton) => {
 			window.history.forward()
 		}
 		window.history.back()
+
+		// 退出详情页时清除缓存
+		queryClient.removeQueries(['playlist'])
+		queryClient.removeQueries(['allSongs'])
 	}
 
 	return (
