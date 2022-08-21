@@ -34,14 +34,26 @@ export const playlistKeys: playlistKey[] = [
 
 export interface Song {
 	id: string
-	name: string // 歌名
-	artist: Artist // 歌手
-	album: Album // 专辑，"al"字段
-	publishTime: string // 发布时间
-	length?: string // 时长
+	// 歌名
+	name: string
+	// 歌手
+	artist: Artist
+	// 专辑，"al"字段
+	album: Album
+	// 发布时间
+	publishTime: string
+	// 时长,"dt"字段
+	length: number
 }
 
-export const songRespKeys: string[] = ['id', 'name', 'ar', 'al', 'publishTime']
+export const songRespKeys: string[] = [
+	'id',
+	'name',
+	'ar',
+	'al',
+	'publishTime',
+	'dt',
+]
 
 export interface Artist {
 	id: string

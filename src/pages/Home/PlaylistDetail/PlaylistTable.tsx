@@ -12,7 +12,7 @@ import {
 } from '@mui/material'
 import { CustomLink, FlexBox } from '../../../components/lib'
 import { Column, Song } from '../../../types/playlist'
-import { fromNow } from '../../../utils'
+import { formatSongLength, fromNow } from '../../../utils/format'
 
 export const PlaylistTable = ({ songs }: { songs: Song[] }) => {
 	return (
@@ -20,14 +20,15 @@ export const PlaylistTable = ({ songs }: { songs: Song[] }) => {
 			<TableContainer>
 				<Table aria-label="playlist table">
 					<TableHead>
-						<CustomTableRow>
+						<CustomTableRow
+							sx={{ borderBottom: '1px solid rgba(81, 81, 81, 1)' }}
+						>
 							{columns.map((column) => (
 								<CustomTableCell
 									key={column.id}
 									align={column.align}
 									style={{ maxWidth: column.maxWidth }}
 									sx={{
-										borderBottom: '1px solid rgba(81, 81, 81, 1)',
 										paddingBottom: '.875em !important',
 										marginBottom: '1.2em',
 										fontSize: '.75rem',
@@ -109,7 +110,7 @@ const columns: readonly Column[] = [
 		id: '🕒',
 		label: <Clock />,
 		align: 'left',
-		format: (song: Song) => song.length || 'xx:xx',
+		format: (song: Song) => formatSongLength(song.length),
 	},
 ]
 
@@ -146,6 +147,7 @@ const CustomTableRow = styled(TableRow)`
 	display: grid;
 	grid-template-columns: 3em 4fr 3fr 3fr 1fr;
 	align-items: center;
+	grid-column-gap: 2em;
 
 	& > * {
 		padding: 0 !important;

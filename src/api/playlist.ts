@@ -8,7 +8,7 @@ import {
 	Song,
 	songRespKeys,
 } from '../types/playlist'
-import { extractProps } from '../utils'
+import { extractProps } from '../utils/format'
 import { http } from './http'
 
 // 获取歌单列表
@@ -89,7 +89,7 @@ export const fetchAllSongsById = (playlistId: string) => {
 				const songsRes = res.data.songs as PlainObject[]
 
 				const songs: Song[] = songsRes.map((song) => {
-					const { id, name, ar, al, publishTime } = extractProps(
+					const { id, name, ar, al, publishTime, dt } = extractProps(
 						song,
 						songRespKeys
 					)
@@ -99,6 +99,7 @@ export const fetchAllSongsById = (playlistId: string) => {
 						artist: { id: ar[0].id, name: ar[0].name },
 						album: { id: al.id, name: al.name, picUrl: al.picUrl },
 						publishTime,
+						length: dt,
 					}
 				})
 
