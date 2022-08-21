@@ -1,5 +1,3 @@
-import { useEffect } from 'react'
-
 // 防抖
 export const debounce = <T = HTMLElement>(fn: Function, delay: number) => {
 	let timer: NodeJS.Timeout
@@ -23,18 +21,4 @@ export const addScrollEvent = () => {
 
 export const removeScrollEvent = () => {
 	document.body.removeEventListener('scroll', fn)
-}
-
-// 组件挂载时指定回调
-export const useMount = (onMount: () => void, onUnmount?: () => void) => {
-	useEffect(() => {
-		onMount()
-
-		if (onUnmount) {
-			return () => {
-				onUnmount()
-			}
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [])
 }

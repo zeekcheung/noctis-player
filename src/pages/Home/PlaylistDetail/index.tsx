@@ -1,8 +1,8 @@
 import { useParams } from 'react-router-dom'
-import { useAllSongs, usePlaylist } from '../../../api/playlist'
 import { Tab } from '../../../components/Tab'
 import { Header } from './Header'
 import { PlaylistTable } from './PlaylistTable'
+import { useAllSongs, usePlaylist } from '../../../hooks/playlist'
 
 export default function PlaylistDetail() {
 	const { id } = useParams<{ id: string }>()

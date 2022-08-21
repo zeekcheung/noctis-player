@@ -1,4 +1,3 @@
-import { useQuery } from '@tanstack/react-query'
 import { PlainObject } from '../types'
 import {
 	Cat,
@@ -38,10 +37,6 @@ export const fetchAllPlaylists = (): Promise<Playlist[][]> => {
 	return Promise.all(promises)
 }
 
-export const useAllPlaylists = () => {
-	return useQuery<Playlist[][], Error>(['allPlaylists'], fetchAllPlaylists)
-}
-
 // 获取歌单分类
 export const fetchCatlist = () => {
 	return new Promise<string[]>((resolve, reject) => {
@@ -53,10 +48,6 @@ export const fetchCatlist = () => {
 			})
 			.catch(reject)
 	})
-}
-
-export const useCatlist = () => {
-	return useQuery<string[], Error>(['catlist'], fetchCatlist)
 }
 
 // 获取歌单详情
@@ -72,10 +63,6 @@ export const fetchPlaylistById = (id: string) => {
 			})
 			.catch(reject)
 	})
-}
-
-export const usePlaylist = (id: string) => {
-	return useQuery<Playlist, Error>(['playlist'], () => fetchPlaylistById(id))
 }
 
 // 获取歌单所有歌曲
@@ -107,10 +94,4 @@ export const fetchAllSongsById = (playlistId: string) => {
 			})
 			.catch(reject)
 	})
-}
-
-export const useAllSongs = (playlistId: string) => {
-	return useQuery<Song[], Error>(['allSongs'], () =>
-		fetchAllSongsById(playlistId)
-	)
 }

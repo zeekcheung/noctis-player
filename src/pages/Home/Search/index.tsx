@@ -1,6 +1,6 @@
-import { useCatlist } from '../../../api/playlist'
 import { Genre } from './Genre'
 import { Tab } from '../../../components/Tab'
+import { useCatlist } from '../../../hooks/playlist'
 
 export default function Search() {
 	const { data: catlist, error, isLoading, isError } = useCatlist()
