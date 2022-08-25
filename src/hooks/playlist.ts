@@ -17,14 +17,18 @@ export const useCatlist = () => {
 	return useQuery<string[], Error>(['catlist'], fetchCatlist)
 }
 
+type PlaylistId = Playlist['id']
+
 // 获取歌单详情
-export const usePlaylist = (id: string) => {
-	return useQuery<Playlist, Error>(['playlist'], () => fetchPlaylistById(id))
+export const usePlaylist = (playlistId: PlaylistId) => {
+	return useQuery<Playlist, Error>(['playlist', playlistId], () =>
+		fetchPlaylistById(playlistId)
+	)
 }
 
 // 获取歌单全部歌曲
-export const useAllTracks = (playlistId: string) => {
-	return useQuery<Track[], Error>(['allTracks'], () =>
+export const useAllTracks = (playlistId: PlaylistId) => {
+	return useQuery<Track[], Error>(['allTracks', playlistId], () =>
 		fetchAllTracksById(playlistId)
 	)
 }
