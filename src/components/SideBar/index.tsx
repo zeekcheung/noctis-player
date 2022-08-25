@@ -32,19 +32,19 @@ const NavBar = () => {
 				Icon={HomeIcon}
 				ActiveIcon={HomeActiveIcon}
 				text={'Home'}
-				to={'/home'}
+				to={'home'}
 			/>
 			<NavIcon
 				Icon={SearchIcon}
 				ActiveIcon={SearchActiveIcon}
 				text={'Search'}
-				to={'/search'}
+				to={'search'}
 			/>
 			<NavIcon
 				Icon={LibraryIcon}
 				ActiveIcon={LibraryIcon}
 				text={'Library'}
-				to={'/library'}
+				to={'library'}
 			/>
 		</Box>
 	)
