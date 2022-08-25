@@ -7,25 +7,25 @@ import {
 	Typography,
 	TypographyProps,
 } from '@mui/material'
+import { ReactComponent as LoopIcon } from 'assets/loop.svg'
+import { ReactComponent as NextIcon } from 'assets/next.svg'
+import { ReactComponent as PauseIcon } from 'assets/pause.svg'
+import { ReactComponent as PlayIcon } from 'assets/play.svg'
+import { ReactComponent as PrevIcon } from 'assets/previous.svg'
+import { ReactComponent as ShuffleIcon } from 'assets/shuffle.svg'
+import { ReactComponent as VolumeIcon } from 'assets/volume.svg'
 import { ChangeEvent, useEffect } from 'react'
-import { fetchTrackUrl } from '../../../api/playlist'
-import { StyledFlexBox } from '../../../components/lib'
+import { fetchTrackUrl } from 'api/playlist'
+import { StyledFlexBox } from 'components/lib'
 import {
 	isPlayingChanged,
 	modeChanged,
 	progressChanged,
 	trackIndexChanged,
-} from '../../../store/audio/actions'
-import { useAudio } from '../../../store/audio/reducer'
-import { Track } from '../../../types/playlist'
-import { getRandomIndex } from '../../../utils'
-import { ReactComponent as LoopIcon } from '/src/assets/loop.svg'
-import { ReactComponent as NextIcon } from '/src/assets/next.svg'
-import { ReactComponent as PauseIcon } from '/src/assets/pause.svg'
-import { ReactComponent as PlayIcon } from '/src/assets/play.svg'
-import { ReactComponent as PrevIcon } from '/src/assets/previous.svg'
-import { ReactComponent as ShuffleIcon } from '/src/assets/shuffle.svg'
-import { ReactComponent as VolumeIcon } from '/src/assets/volume.svg'
+} from 'store/audio/actions'
+import { useAudio } from 'store/audio/reducer'
+import { Track } from 'types/playlist'
+import { getRandomIndex } from 'utils'
 
 interface IAudioControl {
 	tracks: Track[]
