@@ -1,4 +1,4 @@
-import { User } from '../types/user'
+import { User } from 'types/user'
 import { http } from './http'
 
 const storage = window.localStorage

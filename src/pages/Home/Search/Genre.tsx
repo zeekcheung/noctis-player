@@ -2,9 +2,9 @@ import styled from '@emotion/styled'
 import { Typography } from '@mui/material'
 import { Main } from '../Home/Gallery'
 import { Box } from '@mui/system'
-import { getBgcolorByIndex } from '../../../themes'
-import { fetchPlayLists } from '../../../api/playlist'
-import { Cat } from '../../../types/playlist'
+import { getBgcolorByIndex } from 'themes'
+import { fetchPlayLists } from 'api/playlist'
+import { Cat } from 'types/playlist'
 
 export const Genre = ({ catlist }: { catlist: string[] }) => {
 	return (

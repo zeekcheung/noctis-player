@@ -10,11 +10,26 @@ import {
 	TableRow,
 	Typography,
 } from '@mui/material'
-import { CustomLink, FlexBox } from '../../../components/lib'
-import { Column, Track } from '../../../types/playlist'
-import { formatTrackDuration, fromNow } from '../../../utils/format'
+import { CustomLink, FlexBox } from 'components/lib'
+import { Column, Track } from 'types/playlist'
+import { formatTrackDuration, fromNow } from 'utils/format'
+
+import {
+	isPlayingChanged,
+	TrackIndex,
+	trackIndexChanged,
+} from 'store/audio/actions'
+import { useAudio } from 'contexts/AudioProvider'
 
 export const PlaylistTable = ({ tracks }: { tracks: Track[] }) => {
+	const { dispatch } = useAudio()
+
+	// fixme 双击播放音乐
+	const handleDoubleClick = (trackIndex: TrackIndex) => () => {
+		dispatch(trackIndexChanged(trackIndex))
+		dispatch(isPlayingChanged(true))
+	}
+
 	return (
 		<Paper sx={{ marginTop: '2rem', background: 'inherit' }}>
 			<TableContainer>
@@ -43,7 +58,12 @@ export const PlaylistTable = ({ tracks }: { tracks: Track[] }) => {
 					</TableHead>
 					<TableBody>
 						{tracks?.map((track, index) => (
-							<CustomTableRow hover tabIndex={-1} key={track.id}>
+							<CustomTableRow
+								hover
+								tabIndex={-1}
+								key={track.id}
+								onDoubleClick={handleDoubleClick(index)}
+							>
 								{columns.map((column) => (
 									<CustomTableCell key={column.id} align={column.align}>
 										{column.format(track, index + 1)}
@@ -114,7 +134,7 @@ const columns: readonly Column[] = [
 	},
 ]
 
-const TableTitle = ({ track }: { track: Track }) => {
+export const TableTitle = ({ track }: { track: Track }) => {
 	const { name, album, artist } = track
 
 	return (

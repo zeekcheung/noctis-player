@@ -6,7 +6,7 @@ import { ReactComponent as HomeActiveIcon } from 'assets/home-active.svg'
 import { ReactComponent as SearchIcon } from 'assets/search.svg'
 import { ReactComponent as SearchActiveIcon } from 'assets/search-active.svg'
 import { ReactComponent as LibraryIcon } from 'assets/library.svg'
-import { Svg } from '../../types'
+import { Svg } from 'types'
 import { Logo } from '../Icon'
 
 export const SideBar = () => {

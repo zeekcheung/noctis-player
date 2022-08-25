@@ -7,12 +7,12 @@ import {
 	IconButton,
 	Typography,
 } from '@mui/material'
-import { Playlist } from '../../../types/playlist'
+import { Playlist } from 'types/playlist'
 
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
 import PlayCircleIcon from '@mui/icons-material/PlayCircle'
-import { StyledFlexBox } from '../../../components/lib'
+import { StyledFlexBox } from 'components/lib'
 
 export const Header = ({ playlist }: { playlist: Playlist }) => {
 	const {

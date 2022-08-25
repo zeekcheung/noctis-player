@@ -2,7 +2,7 @@ import { ComponentProps, useEffect } from 'react'
 import { FullSizeLoading } from '../lib'
 import { Typography } from '@mui/material'
 import { Container } from './Container'
-import { addScrollEvent, removeScrollEvent } from '../../utils'
+import { addScrollEvent, removeScrollEvent } from 'utils'
 
 interface ITab extends ComponentProps<typeof Container> {
 	isLoading: boolean

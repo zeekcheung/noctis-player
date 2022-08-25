@@ -1,8 +1,8 @@
-import { AuthProvider } from './contexts/AuthProvider'
-import { QueryProvider } from './contexts/QueryProvider'
-import { SnackbarProvider } from './contexts/SnackbarProvider'
-import { Router } from './routes'
-import { ThemesProvider } from './themes'
+import { AuthProvider } from 'contexts/AuthProvider'
+import { QueryProvider } from 'contexts/QueryProvider'
+import { SnackbarProvider } from 'contexts/SnackbarProvider'
+import { Router } from 'routes'
+import { ThemesProvider } from 'themes'
 
 function App() {
 	return (
@@ -10,7 +10,9 @@ function App() {
 			<QueryProvider>
 				<AuthProvider>
 					<SnackbarProvider>
-						<Router />
+						<AuthProvider>
+							<Router />
+						</AuthProvider>
 					</SnackbarProvider>
 				</AuthProvider>
 			</QueryProvider>

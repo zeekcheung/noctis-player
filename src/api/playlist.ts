@@ -1,4 +1,4 @@
-import { PlainObject } from '../types'
+import { PlainObject } from 'types'
 import {
 	Cat,
 	cats,
@@ -6,8 +6,8 @@ import {
 	playlistKeys,
 	Track,
 	trackRespKeys,
-} from '../types/playlist'
-import { extractProps } from '../utils/format'
+} from 'types/playlist'
+import { extractProps } from 'utils/format'
 import { http } from './http'
 
 // 获取歌单列表

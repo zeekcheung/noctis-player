@@ -1,7 +1,7 @@
 import { MouseEventHandler, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../../contexts/AuthProvider'
-import { useSnackbar } from '../../contexts/SnackbarProvider'
+import { useAuth } from 'contexts/AuthProvider'
+import { useSnackbar } from 'contexts/SnackbarProvider'
 import {
 	Container,
 	Divider,

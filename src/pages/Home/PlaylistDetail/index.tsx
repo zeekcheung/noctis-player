@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom'
-import { Tab } from '../../../components/Tab'
-import { useAllTracks, usePlaylist } from '../../../hooks/playlist'
+import { Tab } from 'components/Tab'
+import { useAllTracks, usePlaylist } from 'hooks/playlist'
 import { AudioControl } from './AudioControl'
 import { Header } from './Header'
 import { PlaylistTable } from './PlaylistTable'

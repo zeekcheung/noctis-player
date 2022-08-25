@@ -1,8 +1,8 @@
 import styled from '@emotion/styled'
 import { Box } from '@mui/material'
 import { Outlet } from 'react-router-dom'
-import { SideBar } from '../../components/SideBar'
-import { HeaderBar } from '../../components/HeaderBar'
+import { SideBar } from 'components/SideBar'
+import { HeaderBar } from 'components/HeaderBar'
 
 export default function Home() {
 	return (

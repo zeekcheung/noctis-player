@@ -4,8 +4,8 @@ import {
 	fetchAllTracksById,
 	fetchCatlist,
 	fetchPlaylistById,
-} from '../api/playlist'
-import { Playlist, Track } from '../types/playlist'
+} from 'api/playlist'
+import { Playlist, Track } from 'types/playlist'
 
 // 获取全部歌单
 export const useAllPlaylists = () => {

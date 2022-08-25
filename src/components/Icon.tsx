@@ -1,7 +1,7 @@
 import Brightness7Icon from '@mui/icons-material/Brightness7'
 import { Button, ButtonProps } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
-import { SX } from '../types/themes'
+import { SX } from 'types/themes'
 
 interface ILogo {
 	btnSx?: SX

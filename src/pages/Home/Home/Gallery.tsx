@@ -1,4 +1,4 @@
-import { Playlist } from '../../../types/playlist'
+import { Playlist } from 'types/playlist'
 import styled from '@emotion/styled'
 import {
 	Box,
@@ -10,7 +10,7 @@ import {
 	Typography,
 } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
-import { StyledFlexBox } from '../../../components/lib'
+import { StyledFlexBox } from 'components/lib'
 
 interface IGallery {
 	title: string

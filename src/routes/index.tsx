@@ -1,6 +1,6 @@
 import { lazy, Suspense } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { FullSizeLoading } from '../components/lib'
+import { FullSizeLoading } from 'components/lib'
 
 import HomeTab from '../pages/Home/Home'
 import SearchTab from '../pages/Home/Search'
