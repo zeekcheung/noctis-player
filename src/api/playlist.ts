@@ -106,8 +106,8 @@ export const fetchTrackUrl = (trackId: Track['id']) => {
 				},
 			})
 			.then((res) => {
-				resolve(res.data.url)
+				const url = res.data.data[0].url
+				url ? resolve(url) : reject(`id为${trackId}的音乐，其url无效：${url}`)
 			})
-			.catch(reject)
 	})
 }

@@ -163,3 +163,7 @@ body {
 	--decorative-base: #fff;
 	--decorative-subdued: #292929;
 }
+
+svg {
+	fill: currentColor;
+}

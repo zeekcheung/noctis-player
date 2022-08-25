@@ -1,5 +1,4 @@
 import { useMemo, useReducer, useRef } from 'react'
-import { PlainObject } from '../../types'
 
 export interface IAudioState {
 	// 当前播放音乐的索引
@@ -12,6 +11,7 @@ export interface IAudioState {
 	playMode: 'shuffle' | 'loop'
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export interface IAudioAction<P = any> {
 	type:
 		| 'ToPreviousTrack'

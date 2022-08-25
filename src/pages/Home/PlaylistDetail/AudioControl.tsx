@@ -50,14 +50,18 @@ export const AudioControl = ({ tracks }: IAudioControl) => {
 
 	const handlePlayPauseClick =
 		(playFlag: boolean = true) =>
-		() => {
+		() =>
 			dispatch(isPlayingChanged(playFlag))
-		}
 
 	useEffect(() => {
 		if (isPlaying) {
-			audioRef.current.play()
-			startTimer()
+			// audio.play() 是异步的，会返回一个 Promise
+			audioRef.current
+				.play()
+				.then((_) => {
+					startTimer()
+				})
+				.catch((err) => console.error(err))
 		} else {
 			audioRef.current.pause()
 		}
@@ -77,19 +81,23 @@ export const AudioControl = ({ tracks }: IAudioControl) => {
 		// 先暂停播放上一首音乐
 		audioRef.current.pause()
 
-		fetchTrackUrl(tracks[trackIndex].id).then((url) => {
-			// 更新 Audio 实例
-			audioRef.current = new Audio(url)
-			// 重置进度条
-			dispatch(progressChanged(audioRef.current.currentTime))
+		fetchTrackUrl(tracks[trackIndex].id)
+			.then((url) => {
+				// 更新 Audio 实例
+				audioRef.current = new Audio(url)
+				// 重置进度条
+				dispatch(progressChanged(audioRef.current.currentTime))
 
-			if (isReadyRef.current) {
-				dispatch(isPlayingChanged(true))
-				startTimer()
-			} else {
-				isReadyRef.current = true
-			}
-		})
+				if (isReadyRef.current) {
+					dispatch(isPlayingChanged(true))
+				} else {
+					isReadyRef.current = true
+				}
+			})
+			.catch((err) => {
+				console.error(err)
+				toNextTrack()
+			})
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [trackIndex])
 
