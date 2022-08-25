@@ -23,9 +23,10 @@ import {
 	progressChanged,
 	trackIndexChanged,
 } from 'store/audio/actions'
-import { useAudio } from 'store/audio/reducer'
 import { Track } from 'types/playlist'
 import { getRandomIndex } from 'utils'
+import { TableTitle } from './PlaylistTable'
+import { useAudio } from 'contexts/AudioProvider'
 
 interface IAudioControl {
 	tracks: Track[]
@@ -42,9 +43,11 @@ export const AudioControl = ({ tracks }: IAudioControl) => {
 
 		// 设置新的定时器，每秒更新播放进度
 		intervalRef.current = setInterval(() => {
-			audioRef.current.ended
+			const { ended, currentTime } = audioRef.current
+
+			ended
 				? toNextTrack() // 播放结束，继续播放下一首
-				: dispatch(progressChanged(audioRef.current.currentTime)) // 未播放结束，更新播放进度
+				: dispatch(progressChanged(currentTime)) // 未播放结束，更新播放进度
 		}, 1000)
 	}
 
@@ -63,7 +66,9 @@ export const AudioControl = ({ tracks }: IAudioControl) => {
 				})
 				.catch((err) => console.error(err))
 		} else {
+			// 暂停播放音乐，并取消定时器
 			audioRef.current.pause()
+			clearInterval(intervalRef.current)
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isPlaying])
@@ -131,7 +136,9 @@ export const AudioControl = ({ tracks }: IAudioControl) => {
 
 	return (
 		<Container>
-			<Left />
+			<Left>
+				<TableTitle track={tracks[trackIndex]} />
+			</Left>
 			<Main>
 				<ButtonGroup>
 					<IconButton onClick={handleShuffle}>
@@ -180,10 +187,9 @@ interface ITrackProgress {
 const TrackProgress = ({ startTimer }: ITrackProgress) => {
 	const { state, dispatch, audioRef, intervalRef } = useAudio()
 	const { duration } = audioRef.current
-	const { trackProgress, isPlaying } = state
 
 	const currentPercentage = duration
-		? `${(trackProgress / duration) * 100}%`
+		? `${(state.trackProgress / duration) * 100}%`
 		: '0%'
 	const trackStyle = {
 		background: `
@@ -201,7 +207,7 @@ const TrackProgress = ({ startTimer }: ITrackProgress) => {
 
 	const onScrubEnd = () => {
 		// 如果当前未在播放，则进行播放
-		if (!isPlaying) {
+		if (!state.isPlaying) {
 			dispatch(isPlayingChanged(true))
 		}
 		// 重新开启定时器
@@ -214,7 +220,7 @@ const TrackProgress = ({ startTimer }: ITrackProgress) => {
 			min={0}
 			max={duration || `${duration}`}
 			step={1}
-			value={trackProgress}
+			value={state.trackProgress}
 			onChange={onScrub}
 			onMouseUp={onScrubEnd}
 			onKeyUp={onScrubEnd}

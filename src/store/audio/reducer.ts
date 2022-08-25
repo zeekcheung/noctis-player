@@ -1,5 +1,3 @@
-import { useMemo, useReducer, useRef } from 'react'
-
 export interface IAudioState {
 	// 当前播放音乐的索引
 	trackIndex: number
@@ -23,7 +21,10 @@ export interface IAudioAction<P = any> {
 	payload?: any
 }
 
-const reducer = (state: IAudioState, action: IAudioAction): IAudioState => {
+export const audioReducer = (
+	state: IAudioState,
+	action: IAudioAction
+): IAudioState => {
 	switch (action.type) {
 		case 'IsPlayingChanged':
 			return {
@@ -50,30 +51,9 @@ const reducer = (state: IAudioState, action: IAudioAction): IAudioState => {
 	}
 }
 
-const initialState: IAudioState = {
+export const audioInitialState: IAudioState = {
 	trackIndex: 0,
 	trackProgress: 0,
 	isPlaying: false,
 	playMode: 'loop',
-}
-
-export const useAudio = () => {
-	// state
-	const [state, dispatch] = useReducer(reducer, initialState)
-
-	/* 使用 Ref 保存状态，避免不必要的重新渲染 */
-	// 当前播放音乐的 Audio 实例
-	const audioRef = useRef<HTMLAudioElement>(new Audio())
-	// 当前播放音乐的 interval 定时器
-	const intervalRef = useRef<NodeJS.Timer>()
-	// 当前播放音乐是否已经准备完毕
-	const isReadyRef = useRef(false)
-
-	return {
-		state,
-		dispatch,
-		audioRef: useMemo(() => audioRef, [audioRef]),
-		intervalRef: useMemo(() => intervalRef, [intervalRef]),
-		isReadyRef: useMemo(() => isReadyRef, [isReadyRef]),
-	}
 }

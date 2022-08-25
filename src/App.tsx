@@ -3,6 +3,7 @@ import { QueryProvider } from 'contexts/QueryProvider'
 import { SnackbarProvider } from 'contexts/SnackbarProvider'
 import { Router } from 'routes'
 import { ThemesProvider } from 'themes'
+import { AudioProvider } from 'contexts/AudioProvider'
 
 function App() {
 	return (
@@ -10,9 +11,9 @@ function App() {
 			<QueryProvider>
 				<AuthProvider>
 					<SnackbarProvider>
-						<AuthProvider>
+						<AudioProvider>
 							<Router />
-						</AuthProvider>
+						</AudioProvider>
 					</SnackbarProvider>
 				</AuthProvider>
 			</QueryProvider>

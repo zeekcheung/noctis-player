@@ -18,7 +18,7 @@ export const modeChanged = (mode: PlayMode): IAudioAction<PlayMode> => ({
 	payload: mode,
 })
 
-type TrackIndex = IAudioState['trackIndex']
+export type TrackIndex = IAudioState['trackIndex']
 export const trackIndexChanged = (
 	trackIndex: TrackIndex
 ): IAudioAction<TrackIndex> => ({
