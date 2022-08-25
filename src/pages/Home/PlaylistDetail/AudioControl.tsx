@@ -14,7 +14,7 @@ import { ReactComponent as PlayIcon } from 'assets/play.svg'
 import { ReactComponent as PrevIcon } from 'assets/previous.svg'
 import { ReactComponent as ShuffleIcon } from 'assets/shuffle.svg'
 import { ReactComponent as VolumeIcon } from 'assets/volume.svg'
-import { ChangeEvent, useEffect } from 'react'
+import { ChangeEvent, useEffect, useMemo } from 'react'
 import { fetchTrackUrl } from 'api/playlist'
 import { StyledFlexBox } from 'components/lib'
 import {
@@ -27,13 +27,14 @@ import { Track } from 'types/playlist'
 import { getRandomIndex } from 'utils'
 import { TableTitle } from './PlaylistTable'
 import { useAudio } from 'contexts/AudioProvider'
+import { formatTrackDuration } from 'utils/format'
 
 interface IAudioControl {
 	tracks: Track[]
 }
 
 export const AudioControl = ({ tracks }: IAudioControl) => {
-	const { state, dispatch, audioRef, intervalRef, isReadyRef } = useAudio()
+	const { state, dispatch, audioRef, intervalRef } = useAudio()
 	const { trackIndex, isPlaying, playMode } = state
 
 	// 开启定时器，控制播放进度和自动播放下一首
@@ -90,14 +91,12 @@ export const AudioControl = ({ tracks }: IAudioControl) => {
 			.then((url) => {
 				// 更新 Audio 实例
 				audioRef.current = new Audio(url)
-				// 重置进度条
+				// 继续播放下一首音乐，并更新进度
 				dispatch(progressChanged(audioRef.current.currentTime))
-
-				if (isReadyRef.current) {
-					dispatch(isPlayingChanged(true))
-				} else {
-					isReadyRef.current = true
-				}
+				audioRef.current
+					.play()
+					.then((_) => startTimer())
+					.catch((err) => console.error(err))
 			})
 			.catch((err) => {
 				console.error(err)
@@ -167,11 +166,24 @@ export const AudioControl = ({ tracks }: IAudioControl) => {
 }
 
 const ProgressBar = ({ startTimer }: ITrackProgress) => {
+	const { state, audioRef } = useAudio()
+	const { trackProgress } = state
+	const { duration } = audioRef.current
+
+	const formattedTime = useMemo(
+		() => formatTrackDuration(trackProgress * 1000),
+		[trackProgress]
+	)
+	const formattedDuration = useMemo(
+		() => formatTrackDuration((duration || trackProgress) * 1000),
+		[duration, trackProgress]
+	)
+
 	return (
 		<StyledFlexBox sx={{ width: '100%' }}>
-			<ProgressLabel>current</ProgressLabel>
+			<ProgressLabel>{formattedTime}</ProgressLabel>
 			<TrackProgress startTimer={startTimer} />
-			<ProgressLabel>duration</ProgressLabel>
+			<ProgressLabel>{formattedDuration}</ProgressLabel>
 		</StyledFlexBox>
 	)
 }
@@ -195,6 +207,7 @@ const TrackProgress = ({ startTimer }: ITrackProgress) => {
 		background: `
 			-webkit-gradient(linear, 0% 0%, 100% 0%, color-stop(${currentPercentage}, #fff), color-stop(${currentPercentage}, #777))
 		`,
+		flex: '1',
 	}
 
 	const onScrub = (e: ChangeEvent<HTMLInputElement>) => {

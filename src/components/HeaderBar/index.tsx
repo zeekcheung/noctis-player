@@ -12,6 +12,12 @@ import { useSnackbar } from 'contexts/SnackbarProvider'
 import { useNavigate } from 'react-router-dom'
 import { StyledFlexBox } from '../lib'
 import { useQueryClient } from '@tanstack/react-query'
+import { useAudio } from 'contexts/AudioProvider'
+import {
+	isPlayingChanged,
+	progressChanged,
+	trackIndexChanged,
+} from 'store/audio/actions'
 
 export const HeaderBar = () => {
 	return (
@@ -50,6 +56,7 @@ interface INavigateButton {
 
 const NavigateButton = ({ Icon, type }: INavigateButton) => {
 	const queryClient = useQueryClient()
+	const { dispatch } = useAudio()
 
 	const handleClick = () => {
 		if (type === 'forward') {
@@ -60,6 +67,10 @@ const NavigateButton = ({ Icon, type }: INavigateButton) => {
 		// 退出详情页时清除缓存
 		queryClient.removeQueries(['playlist'])
 		queryClient.removeQueries(['allTracks'])
+		// 重置 Audio 状态
+		dispatch(trackIndexChanged(0))
+		dispatch(progressChanged(0))
+		dispatch(isPlayingChanged(false))
 	}
 
 	return (
