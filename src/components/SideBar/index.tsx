@@ -1,7 +1,13 @@
-import { Box, SvgIcon } from '@mui/material'
-import { HomeIcon, LibraryIcon, Logo, SearchIcon } from '../Icon'
+import { Box } from '@mui/material'
 import styled from '@emotion/styled'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { ReactComponent as HomeIcon } from '/assets/home.svg'
+import { ReactComponent as HomeActiveIcon } from '/assets/home-active.svg'
+import { ReactComponent as SearchIcon } from '/assets/search.svg'
+import { ReactComponent as SearchActiveIcon } from '/src/assets/search-active.svg'
+import { ReactComponent as LibraryIcon } from '/assets/library.svg'
+import { Svg } from '../../types'
+import { Logo } from '../Icon'
 
 export const SideBar = () => {
 	return (
@@ -22,26 +28,44 @@ const Container = styled.aside`
 const NavBar = () => {
 	return (
 		<Box sx={{ marginTop: '1.5rem' }}>
-			<NavIcon Icon={HomeIcon} text={'Home'} to={'/home'} />
-			<NavIcon Icon={SearchIcon} text={'Search'} to={'/search'} />
-			<NavIcon Icon={LibraryIcon} text={'Library'} to={'/library'} />
+			<NavIcon
+				Icon={HomeIcon}
+				ActiveIcon={HomeActiveIcon}
+				text={'Home'}
+				to={'/home'}
+			/>
+			<NavIcon
+				Icon={SearchIcon}
+				ActiveIcon={SearchActiveIcon}
+				text={'Search'}
+				to={'/search'}
+			/>
+			<NavIcon
+				Icon={LibraryIcon}
+				ActiveIcon={LibraryIcon}
+				text={'Library'}
+				to={'/library'}
+			/>
 		</Box>
 	)
 }
 
 interface INavIcon {
-	Icon: typeof SvgIcon
+	Icon: Svg
+	ActiveIcon: Svg
 	text: string
 	to: string
 }
 
-const NavIcon = ({ Icon, text, to }: INavIcon) => {
+const NavIcon = ({ Icon, ActiveIcon, text, to }: INavIcon) => {
 	const navigate = useNavigate()
+	const location = useLocation()
+	const currentPath = location.pathname.split('/').at(-1)
 	const handleClick = () => navigate(to)
 
 	return (
 		<NavIconButton onClick={handleClick}>
-			<Icon />
+			{currentPath === to ? <ActiveIcon /> : <Icon />}
 			<span>{text}</span>
 		</NavIconButton>
 	)

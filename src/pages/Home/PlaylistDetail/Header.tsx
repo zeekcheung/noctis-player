@@ -53,7 +53,7 @@ export const Header = ({ playlist }: { playlist: Playlist }) => {
 						<Description content={description} />
 						<StyledFlexBox>
 							<Typography variant={'body2'}>
-								{`by ${userId} · ${trackCount} songs · ${subscribedCount} likes · ${playCount} plays`}
+								{`by ${userId} · ${trackCount} tracks · ${subscribedCount} likes · ${playCount} plays`}
 							</Typography>
 							<ButtonGroup>
 								<IconButton onClick={() => console.log('播放')}>

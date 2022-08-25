@@ -2,6 +2,7 @@ import {
 	Box,
 	BoxProps,
 	CircularProgress,
+	IconButton,
 	Link as MuiLink,
 	styled,
 	Typography,

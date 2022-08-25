@@ -4,8 +4,8 @@ import {
 	cats,
 	Playlist,
 	playlistKeys,
-	Song,
-	songRespKeys,
+	Track,
+	trackRespKeys,
 } from '../types/playlist'
 import { extractProps } from '../utils/format'
 import { http } from './http'
@@ -51,7 +51,7 @@ export const fetchCatlist = () => {
 }
 
 // 获取歌单详情
-export const fetchPlaylistById = (id: string) => {
+export const fetchPlaylistById = (id: Playlist['id']) => {
 	return new Promise<Playlist>((resolve, reject) => {
 		http
 			.get('/playlist/detail', {
@@ -66,19 +66,19 @@ export const fetchPlaylistById = (id: string) => {
 }
 
 // 获取歌单所有歌曲
-export const fetchAllSongsById = (playlistId: string) => {
-	return new Promise<Song[]>((resolve, reject) => {
+export const fetchAllTracksById = (playlistId: Playlist['id']) => {
+	return new Promise<Track[]>((resolve, reject) => {
 		http
 			.get('/playlist/track/all', {
 				params: { id: playlistId },
 			})
 			.then((res) => {
-				const songsRes = res.data.songs as PlainObject[]
+				const tracksRes = res.data.songs as PlainObject[]
 
-				const songs: Song[] = songsRes.map((song) => {
+				const tracks: Track[] = tracksRes.map((track) => {
 					const { id, name, ar, al, publishTime, dt } = extractProps(
-						song,
-						songRespKeys
+						track,
+						trackRespKeys
 					)
 					return {
 						id,
@@ -86,11 +86,27 @@ export const fetchAllSongsById = (playlistId: string) => {
 						artist: { id: ar[0].id, name: ar[0].name },
 						album: { id: al.id, name: al.name, picUrl: al.picUrl },
 						publishTime,
-						length: dt,
+						duration: dt,
 					}
 				})
 
-				resolve(songs)
+				resolve(tracks)
+			})
+			.catch(reject)
+	})
+}
+
+// 获取歌曲 url
+export const fetchTrackUrl = (trackId: Track['id']) => {
+	return new Promise<string>((resolve, reject) => {
+		http
+			.get('/song/url', {
+				params: {
+					id: trackId,
+				},
+			})
+			.then((res) => {
+				resolve(res.data.url)
 			})
 			.catch(reject)
 	})

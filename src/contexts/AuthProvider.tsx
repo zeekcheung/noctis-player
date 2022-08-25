@@ -13,6 +13,7 @@ interface IContext {
 export const AuthContext = createContext<IContext | null>(null)
 AuthContext.displayName = 'AuthContext'
 
+// todo 使用 react-query 管理 user 状态
 export const AuthProvider = ({ children }: ProviderProps) => {
 	const [user, setUser] = useState<User | null>(null)
 	const login = (...data: Parameters<typeof _login>) =>

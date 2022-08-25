@@ -22,3 +22,8 @@ export const addScrollEvent = () => {
 export const removeScrollEvent = () => {
 	document.body.removeEventListener('scroll', fn)
 }
+
+// 获取 [min, max] 中的随机值
+export const getRandomIndex = (min: number, max: number): number => {
+	return min + Math.random() * (max - min)
+}

@@ -15,6 +15,7 @@ import {
 } from 'react'
 import { ProviderProps } from '../types'
 
+// todo 使用 useReducer 管理 snackbar 状态
 interface ISnackbarContext extends SnackbarProps {
 	openSnackbar: () => void
 	closeSnackbar: () => void

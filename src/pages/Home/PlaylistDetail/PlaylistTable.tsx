@@ -11,10 +11,10 @@ import {
 	Typography,
 } from '@mui/material'
 import { CustomLink, FlexBox } from '../../../components/lib'
-import { Column, Song } from '../../../types/playlist'
-import { formatSongLength, fromNow } from '../../../utils/format'
+import { Column, Track } from '../../../types/playlist'
+import { formatTrackDuration, fromNow } from '../../../utils/format'
 
-export const PlaylistTable = ({ songs }: { songs: Song[] }) => {
+export const PlaylistTable = ({ tracks }: { tracks: Track[] }) => {
 	return (
 		<Paper sx={{ marginTop: '2rem', background: 'inherit' }}>
 			<TableContainer>
@@ -42,11 +42,11 @@ export const PlaylistTable = ({ songs }: { songs: Song[] }) => {
 						</CustomTableRow>
 					</TableHead>
 					<TableBody>
-						{songs?.map((song, index) => (
-							<CustomTableRow hover tabIndex={-1} key={song.id}>
+						{tracks?.map((track, index) => (
+							<CustomTableRow hover tabIndex={-1} key={track.id}>
 								{columns.map((column) => (
 									<CustomTableCell key={column.id} align={column.align}>
-										{column.format(song, index + 1)}
+										{column.format(track, index + 1)}
 									</CustomTableCell>
 								))}
 							</CustomTableRow>
@@ -77,7 +77,7 @@ const columns: readonly Column[] = [
 		id: '#',
 		label: '#',
 		align: 'center',
-		format: (_: Song, index?: number) => (
+		format: (_: Track, index?: number) => (
 			<Typography
 				sx={{
 					fontSize: '1rem',
@@ -92,30 +92,30 @@ const columns: readonly Column[] = [
 		id: 'TITLE',
 		label: 'TITLE',
 		align: 'left',
-		format: (song: Song, _?: number) => <TableTitle song={song} />,
+		format: (track: Track, _?: number) => <TableTitle track={track} />,
 	},
 	{
 		id: 'ALBUM',
 		label: 'ALBUM',
 		align: 'left',
-		format: (song: Song, _?: number) => <CustomLink>{song.name}</CustomLink>,
+		format: (track: Track, _?: number) => <CustomLink>{track.name}</CustomLink>,
 	},
 	{
 		id: 'DATE PUBLISHED',
 		label: 'DATE PUBLISHED',
 		align: 'left',
-		format: (song: Song, _?: number) => fromNow(song.publishTime),
+		format: (track: Track, _?: number) => fromNow(track.publishTime),
 	},
 	{
 		id: '🕒',
 		label: <Clock />,
 		align: 'left',
-		format: (song: Song) => formatSongLength(song.length),
+		format: (track: Track) => formatTrackDuration(track.duration),
 	},
 ]
 
-const TableTitle = ({ song }: { song: Song }) => {
-	const { name, album, artist } = song
+const TableTitle = ({ track }: { track: Track }) => {
+	const { name, album, artist } = track
 
 	return (
 		<FlexBox>

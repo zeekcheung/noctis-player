@@ -1,8 +1,9 @@
 import { useParams } from 'react-router-dom'
 import { Tab } from '../../../components/Tab'
+import { useAllTracks, usePlaylist } from '../../../hooks/playlist'
+import { AudioControl } from './AudioControl'
 import { Header } from './Header'
 import { PlaylistTable } from './PlaylistTable'
-import { useAllSongs, usePlaylist } from '../../../hooks/playlist'
 
 export default function PlaylistDetail() {
 	const { id } = useParams<{ id: string }>()
@@ -13,20 +14,21 @@ export default function PlaylistDetail() {
 		isError: playlistIsError,
 	} = usePlaylist(id || '')
 	const {
-		data: songs,
-		error: songsError,
-		isLoading: songsIsLoading,
-		isError: songsIsError,
-	} = useAllSongs(id || '')
+		data: tracks,
+		error: tracksError,
+		isLoading: tracksIsLoading,
+		isError: tracksIsError,
+	} = useAllTracks(id || '')
 
 	return (
 		<Tab
-			isLoading={playlistIsLoading || songsIsLoading}
-			isError={playlistIsError || songsIsError}
-			error={playlistError || songsError}
+			isLoading={playlistIsLoading || tracksIsLoading}
+			isError={playlistIsError || tracksIsError}
+			error={playlistError || tracksError}
 		>
 			{playlist && <Header playlist={playlist} />}
-			{songs && <PlaylistTable songs={songs} />}
+			{tracks && <PlaylistTable tracks={tracks} />}
+			{tracks && <AudioControl tracks={tracks} />}
 		</Tab>
 	)
 }

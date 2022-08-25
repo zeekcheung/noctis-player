@@ -32,7 +32,7 @@ export const playlistKeys: playlistKey[] = [
 	'playCount',
 ]
 
-export interface Song {
+export interface Track {
 	id: string
 	// 歌名
 	name: string
@@ -43,10 +43,10 @@ export interface Song {
 	// 发布时间
 	publishTime: string
 	// 时长,"dt"字段
-	length: number
+	duration: number
 }
 
-export const songRespKeys: string[] = [
+export const trackRespKeys: string[] = [
 	'id',
 	'name',
 	'ar',
@@ -73,5 +73,5 @@ export interface Column {
 	minWidth?: number | string
 	maxWidth?: number | string
 	align?: 'left' | 'right' | 'center'
-	format: (song: Song, index?: number) => ReactNode
+	format: (track: Track, index?: number) => ReactNode
 }

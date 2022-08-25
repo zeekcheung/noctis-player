@@ -15,7 +15,7 @@ export const extractProps = (o: Object, keys: string[]) => {
 }
 
 // 格式化歌曲时长
-export const formatSongLength = (dt: number) => {
+export const formatTrackDuration = (dt: number) => {
 	dt /= 1000
 	const m = Math.floor(dt / 60)
 	const s = Math.floor(dt % 60)

@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query'
-import { Playlist, Song } from '../types/playlist'
 import {
 	fetchAllPlaylists,
-	fetchAllSongsById,
+	fetchAllTracksById,
 	fetchCatlist,
 	fetchPlaylistById,
 } from '../api/playlist'
+import { Playlist, Track } from '../types/playlist'
 
 // 获取全部歌单
 export const useAllPlaylists = () => {
@@ -23,8 +23,8 @@ export const usePlaylist = (id: string) => {
 }
 
 // 获取歌单全部歌曲
-export const useAllSongs = (playlistId: string) => {
-	return useQuery<Song[], Error>(['allSongs'], () =>
-		fetchAllSongsById(playlistId)
+export const useAllTracks = (playlistId: string) => {
+	return useQuery<Track[], Error>(['allTracks'], () =>
+		fetchAllTracksById(playlistId)
 	)
 }
