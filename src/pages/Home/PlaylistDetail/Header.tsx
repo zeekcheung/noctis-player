@@ -13,6 +13,8 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
 import PlayCircleIcon from '@mui/icons-material/PlayCircle'
 import { StyledFlexBox } from 'components/lib'
+import { useAudio } from 'contexts/AudioProvider'
+import { isPlayingChanged, trackIndexChanged } from 'store/audio/actions'
 
 export const Header = ({ playlist }: { playlist: Playlist }) => {
 	const {
@@ -24,6 +26,19 @@ export const Header = ({ playlist }: { playlist: Playlist }) => {
 		trackCount,
 		playCount,
 	} = playlist
+
+	const { dispatch } = useAudio()
+
+	// 播放歌单
+	const handlePlayClick = () => {
+		// 重置 trackIndex
+		dispatch(trackIndexChanged(0))
+		// 设置 isPlaying
+		dispatch(isPlayingChanged(true))
+	}
+
+	// 收藏/取消收藏歌单
+	const handleCollectClick = () => {}
 
 	return (
 		<Container>
@@ -56,7 +71,7 @@ export const Header = ({ playlist }: { playlist: Playlist }) => {
 								{`by ${userId} · ${trackCount} tracks · ${subscribedCount} likes · ${playCount} plays`}
 							</Typography>
 							<ButtonGroup>
-								<IconButton onClick={() => console.log('播放')}>
+								<IconButton onClick={handlePlayClick}>
 									<PlayCircleIcon />
 								</IconButton>
 								<IconButton onClick={() => console.log('收藏')}>

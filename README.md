@@ -1,5 +1,5 @@
 <div style="text-align: center">
-    <img alt="logo.png" src="./public/logo.png" 
+    <img alt="logo.png" src="./public/logo.png"
 width="200px"/>
 
   <p style="text-align: center">
@@ -13,8 +13,6 @@ width="200px"/>
 
 Noctis Player 是一个基于 React、TypeScript 的音乐播放器。
 
-![项目首页截图](https://)
-
 ### 技术栈
 
 - [React](https://github.com/facebook/react/)
@@ -24,10 +22,6 @@ Noctis Player 是一个基于 React、TypeScript 的音乐播放器。
 - [Material UI](https://mui.com/)
 - [Emotion](https://emotion.sh/docs/introduction)
 - [Axios](https://axios-http.com/docs/intro)
-
-## 演示截图
-
-截图
 
 ## 功能列表
 
@@ -43,12 +37,13 @@ Noctis Player 是一个基于 React、TypeScript 的音乐播放器。
   - [ ] 搜索关键词（音乐、歌手...）
 - [ ] 歌单详情页
   - [ ] 收藏/取消收藏歌单
-  - [ ] 播放歌单
+  - [x] 播放歌单
 - [ ] 音乐播放功能
-  - [ ] 播放列表
-  - [ ] 单曲循环/随机播放
-  - [ ] 切换歌曲
-  - [ ] 拖拽进度条和音量条
+  - [x] 播放列表
+  - [x] 列表循环/随机播放
+  - [x] 切换歌曲
+  - [x] 拖拽进度条
+  - [ ] 拖拽音量条
   - [ ] 歌词滚动/点击歌词跳转
   - [ ] MV 页面(无 MV 播放栏不显示图标) 点击自动暂停音乐自动切换其他 MV
 - [ ] 音乐库（需要登录）
@@ -63,20 +58,17 @@ npm install
 npm run start
 ```
 
-## 贡献和支持 🤝
+## 贡献和支持
 
-欢迎提供问题和功能需求, 如果大家有好的点子和优化建议, 也欢迎提 pr 参与我们的共建.
+欢迎提供问题和优化建议, 也欢迎提 pr 参与共建.
 
-如果觉得项目还不错, 就点个 star 吧~
+如果觉得项目还不错, 就点个 ⭐ 吧~
 
 ## 联系方式
 
-Your Name
+- zeekcheung@outlook.com
 
-- [@your_twitter](https://twitter.com/your_username)
-- email@example.com
-
-## 参考 🖇️
+## 参考
 
 项目灵感来自于以下项目
 

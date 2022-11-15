@@ -111,3 +111,28 @@ export const fetchTrackUrl = (trackId: Track['id']) => {
 			})
 	})
 }
+
+// 收藏/取消收藏歌单
+export const subscribePlaylist = (
+	playlistId: Playlist['id'],
+	type: boolean
+) => {
+	return new Promise<true>((resolve) => {
+		http
+			.get('/playlist/subscribe', {
+				params: {
+					t: type ? 1 : 2, // 1: 收藏, 2: 取消收藏
+					id: playlistId,
+				},
+			})
+			// todo 收藏/取消收藏歌单
+			.then((res) => {
+				console.log(res)
+				// 如果收藏失败，抛出异常
+				// if (res) {
+				// 	throw new Error()
+				// }
+				resolve(true)
+			})
+	})
+}
